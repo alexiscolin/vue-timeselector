@@ -84,8 +84,11 @@ export default {
     pad (time) {
       return this.padTime ? time.toString().padStart(2, '0') : time;
     },
-    timeCount (interval = 1, timeLength = 60) {
-      return Array.apply(null, {length: timeLength}).map(Number.call, Number => Number + 1).filter(num => num % interval === 0);
+    timeCount (interval = 1, timeLength = 59) {
+      return Array.apply(null, {length: timeLength})
+             .map(Number.call, Number => timeLength < 59 ? (!this.h24 ? Number + 1 : Number) : Number )
+             .filter(num => num % interval === 0)
+             .map(time => this.pad(time));
     },
   }
 }
