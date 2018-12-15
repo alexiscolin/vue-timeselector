@@ -154,7 +154,7 @@ export default {
     },
     selectTime (time, e) {
       this.picker[time] = e.target.textContent;
-      this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker.hour);
+      this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker[time]);
     }
   }
 }

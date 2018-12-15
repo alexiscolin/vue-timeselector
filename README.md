@@ -1,6 +1,28 @@
 # vue-timeselector
 🕒 Simple customizable Vue.js timepicker component
 
+## Install
+
+``` bash
+npm install vue-timeselector --save
+```
+or
+``` bash
+yarn add vue-timeselector
+```
+
+``` javascript
+import Timepicker from 'vue-timeselector';
+
+export default {
+  // ...
+  components: {
+    Timepicker
+  }
+  // ...
+}
+```
+
 ## Available props
 
 | Prop                          | Type             | Default             | Description                                              |
