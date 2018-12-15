@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'timeselector',
   props: {
@@ -38,6 +40,10 @@ export default {
     padTime: {
       type: Boolean,
       default: false
+    },
+    format: {
+      type: String,
+      default: 'HH:mm'
     },
     h24: {
       type: Boolean,
@@ -62,8 +68,10 @@ export default {
         hour: 0,
         min: 0,
         sec: 0,
-        long: false
+        long: false,
+        time: new Date()
       },
+      formater: ['HH', 'H', 'hh', 'h', 'kk', 'k', 'mm', 'm', 'ss', 's'],
       longHourCount: 24,
       shortHourCount: 12,
       minCount: 60,
@@ -74,10 +82,44 @@ export default {
     hoursLength () {
       return this.h24 ? this.longHourCount : this.shortHourCount;
     },
+    displayRules () {
+      return {
+        HH: () => this.pad(this.picker.hour),
+        H: () => this.picker.hour,
+        kk: () => this.pad(this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour),
+        k: () => this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour,
+        hh: () => {
+          if (this.h24)
+            return this.pad(this.picker.hour > 12 ? 12 - (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour) : this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour)
+          return this.pad(this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour)
+        },
+        h: () => {
+          if (this.h24)
+            return this.picker.hour > 12 ? 12 - (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour) : (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour)
+          return this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour
+        },
+        mm: () => this.pad(this.picker.min),
+        m: () => this.picker.min.toString(),
+        ss: () => this.pad(this.picker.sec),
+        s: () => this.picker.sec.toString()
+      }
+    },
     timeToDisplay () {
-      return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
-              (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.min)) : (this.displayMinutes ? this.padTime(this.picker.min) : '')) +
-              (this.displaySeconds ? (this.separator + this.pad(this.picker.sec)) : '');
+      if(!this.format)
+        return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
+                (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.min)) : (this.displayMinutes ? this.padTime(this.picker.min) : '')) +
+                (this.displaySeconds ? (this.separator + this.pad(this.picker.sec)) : '');
+
+      let timeToDisplay = this.format;
+      this.formater.forEach(format => {
+        (typeof this.displayRules[format] !== 'undefined') && (timeToDisplay = timeToDisplay.replace(new RegExp(format, 'g'), this.displayRules[format]()));
+      });
+
+      return timeToDisplay
+
+    },
+    time () {
+      return this.picker.time.setHours(this.picker.hour, this.picker.min, this.picker.sec);
     }
   },
   methods: {
