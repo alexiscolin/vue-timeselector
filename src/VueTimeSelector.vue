@@ -166,8 +166,10 @@ export default {
   }
   .vtimeselctor__box {
     position: absolute;
+    display: flex;
     left: 0;
     top: 100%;
-    display: flex;
+    background: white;
+    z-index: 1;
   }
 </style>
