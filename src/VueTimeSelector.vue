@@ -43,7 +43,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'HH:mm'
+      default: 'HH[h]mm'
     },
     h24: {
       type: Boolean,
@@ -110,13 +110,18 @@ export default {
                 (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.min)) : (this.displayMinutes ? this.padTime(this.picker.min) : '')) +
                 (this.displaySeconds ? (this.separator + this.pad(this.picker.sec)) : '');
 
-      let timeToDisplay = this.format;
+      let display = this.format;
       this.formater.forEach(format => {
-        (typeof this.displayRules[format] !== 'undefined') && (timeToDisplay = timeToDisplay.replace(new RegExp(format, 'g'), this.displayRules[format]()));
+        if (typeof this.displayRules[format] !== 'undefined') {
+          // replace time formater
+          display = display.replace(new RegExp(`${format}(?!\])`, 'g'), this.displayRules[format]());
+
+          // replace time escaped formater
+          display = display.replace(new RegExp(`\\[${format}\\]`, 'g'), format);
+        }
       });
 
-      return timeToDisplay
-
+      return display
     },
     time () {
       return this.picker.time.setHours(this.picker.hour, this.picker.min, this.picker.sec);
