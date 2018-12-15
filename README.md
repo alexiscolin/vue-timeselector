@@ -12,12 +12,12 @@ yarn add vue-timeselector
 ```
 
 ``` javascript
-import Timepicker from 'vue-timeselector';
+import Timeselector from 'vue-timeselector';
 
 export default {
   // ...
   components: {
-    Timepicker
+    Timeselector
   }
   // ...
 }

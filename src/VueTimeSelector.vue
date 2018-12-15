@@ -94,9 +94,18 @@ export default {
     }
   },
   computed: {
+    /**
+    * @desc Get 24|12 hours mode
+    * @return {Number} - function to generate time replacement
+    */
     hoursLength () {
       return this.h24 ? this.longHourCount : this.shortHourCount;
     },
+
+    /**
+    * @desc Rules that defines time replacement in regex
+    * @return {Object} - function to generate time replacement
+    */
     displayRules () {
       return {
         HH: () => this.pad(this.picker.hour),
@@ -119,12 +128,19 @@ export default {
         s: () => this.picker.second.toString()
       }
     },
+
+    /**
+    * @desc Generate a time format depending on formating props
+    * @return {String} - formated time
+    */
     timeToDisplay () {
+      // Inline formating (separator/displayHours... props)
       if(!this.format)
         return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
                 (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.padTime(this.picker.minute) : '')) +
                 (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '');
 
+      // RegExp formating (format props)
       let display = this.format;
       this.formater.forEach(format => {
         if (typeof this.displayRules[format] !== 'undefined') {
@@ -138,6 +154,11 @@ export default {
 
       return display
     },
+
+    /**
+    * @desc Get time as date Object
+    * @return {Date} - Time as a date Object
+    */
     time () {
       return this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
     }
