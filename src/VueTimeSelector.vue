@@ -1,15 +1,15 @@
 <template>
   <div class="vtimeselctor">
-    <input type="text" :id="id" :required="required" :name="name" readonly="readonly" autocomplete="off" v-model="timeToDisplay">
+    <input type="text" :id="id" :required="required" :name="name" readonly="readonly" autocomplete="off" v-model="timeToDisplay" @input="$emit('input', $event.target.value)">
     <div class="vtimeselctor__box">
         <ul>
-          <li v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index">{{hour}}</li>
+          <li v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', $event)">{{hour}}</li>
         </ul>
         <ul>
-          <li v-for="(min, index) in timeCount(interval.m)" :key="index">{{min}}</li>
+          <li v-for="(minute, index) in timeCount(interval.m)" :key="index" @click="selectTime('minute', $event)">{{minute}}</li>
         </ul>
         <ul v-if="displaySeconds">
-          <li v-for="(sec, index) in timeCount(interval.s)" :key="index">{{sec}}</li>
+          <li v-for="(second, index) in timeCount(interval.s)" :key="index" @click="selectTime('second', $event)">{{second}}</li>
         </ul>
     </div>
   </div>
@@ -52,8 +52,7 @@ export default {
       default: false
     },
     format: {
-      type: String,
-      default: 'HH[h]mm'
+      type: String
     },
     h24: {
       type: Boolean,
@@ -82,8 +81,8 @@ export default {
     return {
       picker: {
         hour: 0,
-        min: 0,
-        sec: 0,
+        minute: 0,
+        second: 0,
         long: false,
         time: new Date()
       },
@@ -114,17 +113,17 @@ export default {
             return this.picker.hour > 12 ? 12 - (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour) : (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour)
           return this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour
         },
-        mm: () => this.pad(this.picker.min),
-        m: () => this.picker.min.toString(),
-        ss: () => this.pad(this.picker.sec),
-        s: () => this.picker.sec.toString()
+        mm: () => this.pad(this.picker.minute),
+        m: () => this.picker.minute.toString(),
+        ss: () => this.pad(this.picker.second),
+        s: () => this.picker.second.toString()
       }
     },
     timeToDisplay () {
       if(!this.format)
         return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
-                (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.min)) : (this.displayMinutes ? this.padTime(this.picker.min) : '')) +
-                (this.displaySeconds ? (this.separator + this.pad(this.picker.sec)) : '');
+                (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.padTime(this.picker.minute) : '')) +
+                (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '');
 
       let display = this.format;
       this.formater.forEach(format => {
@@ -140,7 +139,7 @@ export default {
       return display
     },
     time () {
-      return this.picker.time.setHours(this.picker.hour, this.picker.min, this.picker.sec);
+      return this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
     }
   },
   methods: {
@@ -153,6 +152,10 @@ export default {
              .filter(num => num % interval === 0)
              .map(time => this.pad(time));
     },
+    selectTime (time, e) {
+      this.picker[time] = e.target.textContent;
+      this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker.hour);
+    }
   }
 }
 </script>

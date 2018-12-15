@@ -35,7 +35,7 @@ These events are emitted on actions in the timepicker
 | opened            |            | The picker is opened                 |
 | closed            |            | The picker is closed                 |
 | selectedHour      | Date\|null | An hour has been selected            |
-| selectedMinute    | Date\|null | A minutes has been selected          |
+| selectedMinute    | Date\|null | A minute has been selected           |
 | selectedSecond    | Date\|null | A second has been selected           |
 | selectedDisabled  | Object     | A disabled time has been selected    |
 | input             | Date\|null | Input value has been modified        |
