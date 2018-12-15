@@ -14,7 +14,7 @@
 | displayHours                  | Boolean          | true                | Display hours to the input                               |
 | displayMinutes                | Boolean          | true                | Display minutes to the input                             |
 | displaySeconds                | Boolean          | false               | Display seconds to the input                             |
-| separator                     | String           | :                   | Separator symbol                                         |
+| separator                     | String           | ":"                 | Separator symbol                                         |
 | padTime                       | Boolean          | true                | Pads number with a zero                                  |
 | format                        | String           |                     | Time formating string                                    |
 | h24                           | Boolean          | false               | Display 24 hours format                                  |
