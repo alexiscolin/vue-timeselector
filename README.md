@@ -6,10 +6,10 @@
 | Prop                          | Type             | Default             | Description                                              |
 |-------------------------------|------------------|---------------------|----------------------------------------------------------|
 | value                         | Date             | `TODO`              | Date value of the timepicker                             |
-| name                          | String           | `TODO`              | Input name property                                      |
-| id                            | String           | `TODO`              | Input id                                                 |
+| name                          | String           |                     | Input name property                                      |
+| id                            | String           |                     | Input id                                                 |
 | placeholder                   | String           | `TODO`              | Input placeholder text                                   |
-| required                      | Boolean          | `TODO`              | Sets html required attribute on input                    |
+| required                      | Boolean          | false               | Sets html required attribute on input                    |
 | disabled                      | Boolean          | `TODO`              | If true, disable timepicker on screen                    |
 | displayHours                  | Boolean          | true                | Display hours to the input                               |
 | displayMinutes                | Boolean          | true                | Display minutes to the input                             |

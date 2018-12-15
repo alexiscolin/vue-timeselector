@@ -1,15 +1,15 @@
 <template>
   <div class="vtimeselctor">
-    <input type="text" readonly="readonly" autocomplete="off" v-model="timeToDisplay">
+    <input type="text" :id="id" :required="required" :name="name" readonly="readonly" autocomplete="off" v-model="timeToDisplay">
     <div class="vtimeselctor__box">
         <ul>
-          <li v-for="(hour, index) in timeCount(hoursInterval, hoursLength)" :key="index">{{hour}}</li>
+          <li v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index">{{hour}}</li>
         </ul>
         <ul>
-          <li v-for="(min, index) in timeCount(minutesInterval)" :key="index">{{min}}</li>
+          <li v-for="(min, index) in timeCount(interval.m)" :key="index">{{min}}</li>
         </ul>
-        <ul>
-          <li v-for="(sec, index) in timeCount(secondsInterval)" :key="index">{{sec}}</li>
+        <ul v-if="displaySeconds">
+          <li v-for="(sec, index) in timeCount(interval.s)" :key="index">{{sec}}</li>
         </ul>
     </div>
   </div>
@@ -21,6 +21,16 @@ import moment from 'moment';
 export default {
   name: 'timeselector',
   props: {
+    id: {
+      type: String
+    },
+    name: {
+      type: String
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
     displayHours: {
       type: Boolean,
       default: true
@@ -49,9 +59,15 @@ export default {
       type: Boolean,
       default: false
     },
-    hoursInterval: {
-      type: Number,
-      default: 1
+    interval: {
+      type: Object,
+      default: function () {
+        return {
+          h: 1,
+          m: 10,
+          s: 10
+        }
+      }
     },
     minutesInterval: {
       type: Number,
