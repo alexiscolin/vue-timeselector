@@ -61,6 +61,10 @@ export default {
       type: Boolean,
       default: false
     },
+    utc: {
+      type: Boolean,
+      default: false
+    },
     interval: {
       type: Object,
       default: function () {
@@ -159,12 +163,12 @@ export default {
     },
 
     /**
-    * Get time as date Object
+    * Get time as date Object - UTC or not depending on props utc
     * @return {Date} - Time as a date Object
     */
     time () {
       this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
-      return new Date(this.picker.time);
+      return this.utc ? new Date(Date.UTC(this.value.getFullYear(), this.value.getMonth(), this.value.getDate(), this.picker.hour, this.picker.minute, this.picker.second)) : new Date(this.picker.time);
     }
   },
   methods: {

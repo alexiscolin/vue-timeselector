@@ -40,6 +40,7 @@ export default {
 | padTime                       | Boolean          | true                | Pads number with a zero                                  |
 | format                        | String           |                     | Time formating string                                    |
 | h24                           | Boolean          | false               | Display 24 hours format                                  |
+| utc                           | Boolean          | false               | Return UTC date format                                   |
 | inline                        | Boolean          | false               | Show the timepicker always open                          |
 | initialView                   | Boolean          | false               | Open on the first                                        |
 | interval                      | Object           | {h:1, m:10, s:10}   | Define hours, minutes and seconds interval to the picker |
