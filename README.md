@@ -27,7 +27,7 @@ export default {
 
 | Prop                          | Type             | Default             | Description                                              |
 |-------------------------------|------------------|---------------------|----------------------------------------------------------|
-| value                         | Date             | `TODO`              | Date value of the timepicker                             |
+| value                         | Date             |                     | Date value of the timepicker                             |
 | name                          | String           |                     | Input name property                                      |
 | id                            | String           |                     | Input id                                                 |
 | placeholder                   | String           | `TODO`              | Input placeholder text                                   |

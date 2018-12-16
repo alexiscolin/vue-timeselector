@@ -1,6 +1,6 @@
 <template>
   <div class="vtimeselector">
-    <input type="text" :id="id" :required="required" :name="name" readonly="readonly" autocomplete="off" v-model="timeToDisplay" @input="$emit('input', $event.target.value)">
+    <input type="text" :id="id" :required="required" :name="name" readonly="readonly" autocomplete="off" v-model="timeToDisplay">
     <div class="vtimeselector__box">
         <ul>
           <li v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', $event)">{{hour}}</li>
@@ -21,6 +21,9 @@ import moment from 'moment';
 export default {
   name: 'timeselector',
   props: {
+    value: {
+      type: Date
+    },
     id: {
       type: String
     },
@@ -80,9 +83,9 @@ export default {
   data () {
     return {
       picker: {
-        hour: 0,
-        minute: 0,
-        second: 0,
+        hour: this.value ? this.value.getHours() : 0,
+        minute: this.value ? this.value.getMinutes() : 0,
+        second: this.value ? this.value.getSeconds() : 0,
         long: false,
         time: new Date()
       },
@@ -160,7 +163,8 @@ export default {
     * @return {Date} - Time as a date Object
     */
     time () {
-      return this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
+      this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
+      return new Date(this.picker.time);
     }
   },
   methods: {
@@ -191,10 +195,12 @@ export default {
     * @param {String} time - kind of time selected (hour, minute, second)
     * @param {Object} e - event listened
     * @fires selected(Hour|Minute|Second)
+    * @fires input
     */
     selectTime (time, e) {
       this.picker[time] = e.target.textContent;
       this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker[time]);
+      this.$emit('input', this.time);
     }
   }
 }
