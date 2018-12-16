@@ -58,11 +58,11 @@ These events are emitted on actions in the timepicker
 |-------------------|------------|--------------------------------------|
 | opened            |            | The picker is opened                 |
 | closed            |            | The picker is closed                 |
-| selectedHour      | Date\|null | An hour has been selected            |
-| selectedMinute    | Date\|null | A minute has been selected           |
-| selectedSecond    | Date\|null | A second has been selected           |
+| selectedHour      | Date       | An hour has been selected            |
+| selectedMinute    | Date       | A minute has been selected           |
+| selectedSecond    | Date       | A second has been selected           |
 | selectedDisabled  | Object     | A disabled time has been selected    |
-| input             | Date\|null | Input value has been modified        |
+| input             | Date       | Input value has been modified        |
 | cleared           |            | Selected time has been cleared       |
 
 ## Time formatting
@@ -93,6 +93,8 @@ npm run styleguide
 # to build a static version
 npm run styleguide:build
 ```
+
+**Component's documentation is available [here](https://alexiscolin.github.io/vue-timeselector/)**
 
 ## License
 
