@@ -12,13 +12,13 @@
            @click="togglePicker">
 
     <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
-        <ul class="vtimeselector__box__list vtimeselector__box__list--hours">
+        <ul class="vtimeselector__box__list vtimeselector__box__list--hours" v-if="displayHours">
           <li class="vtimeselector__box__item vtimeselector__box__item--hours" v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', $event)">{{hour}}</li>
         </ul>
-        <ul class="vtimeselector__box__list vtimeselector__box__list--minutes">
+        <ul class="vtimeselector__box__list vtimeselector__box__list--minutes" v-if="displayMinutes">
           <li class="vtimeselector__box__item vtimeselector__box__item--minutes" v-for="(minute, index) in timeCount(interval.m)" :key="index" @click="selectTime('minute', $event)">{{minute}}</li>
         </ul>
-        <ul v-if="displaySeconds" class="vtimeselector__box__list vtimeselector__box__list--seconds">
+        <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="displaySeconds">
           <li class="vtimeselector__box__item vtimeselector__box__item--seconds" v-for="(second, index) in timeCount(interval.s)" :key="index" @click="selectTime('second', $event)">{{second}}</li>
         </ul>
     </div>
