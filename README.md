@@ -56,8 +56,8 @@ These events are emitted on actions in the timepicker
 
 | Event             | Output     | Description                          |
 |-------------------|------------|--------------------------------------|
-| opened            |            | The picker is opened                 |
-| closed            |            | The picker is closed                 |
+| opened            | Node       | The picker is opened                 |
+| closed            | Node       | The picker is closed                 |
 | selectedHour      | Date       | An hour has been selected            |
 | selectedMinute    | Date       | A minute has been selected           |
 | selectedSecond    | Date       | A second has been selected           |

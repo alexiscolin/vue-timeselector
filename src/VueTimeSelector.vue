@@ -1,7 +1,15 @@
 <template>
   <div class="vtimeselector">
-    <input type="text" :id="id" :required="required" :name="name" readonly="readonly" autocomplete="off" v-model="timeToDisplay">
-    <div class="vtimeselector__box">
+    <input type="text"
+           readonly="readonly"
+           autocomplete="off"
+           v-model="timeToDisplay"
+           :id="id"
+           :required="required"
+           :name="name"
+           @click="togglePicker">
+
+    <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
         <ul>
           <li v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', $event)">{{hour}}</li>
         </ul>
@@ -18,7 +26,7 @@
 <script>
 
 /**
- * Timeselector component.
+ * Timeselector component. Click bellow to see more informations about the component
  * @example ../README.md
  */
 export default {
@@ -126,7 +134,8 @@ export default {
         minute: this.value ? this.value.getMinutes() : 0,
         second: this.value ? this.value.getSeconds() : 0,
         long: false,
-        time: new Date()
+        time: new Date(),
+        isClosed: true
       },
       formater: ['HH', 'H', 'hh', 'h', 'kk', 'k', 'mm', 'm', 'ss', 's'],
       longHourCount: 24,
@@ -236,7 +245,7 @@ export default {
     * @param {String} time - kind of time selected (hour, minute, second)
     * @param {Object} e - event listened
     * @emits selected(Hour|Minute|Second)
-
+    * @emits input
     * @public
     */
     selectTime (time, e) {
@@ -254,6 +263,23 @@ export default {
       * @type {Date|Object}
       */
       this.$emit('input', this.time);
+    },
+
+    /**
+    * Toggle timepocker in order to open or close the select modal
+    * @emits opened
+    * @emits closed
+    * @public
+    */
+    togglePicker () {
+      this.picker.isClosed = !this.picker.isClosed;
+
+      /**
+      * Emit opened|closed modal event
+      * @event opened|closed
+      * @type {Node}
+      */
+      this.picker.isClosed ? this.$emit('closed', this.$el) : this.$emit('opened', this.$el);
     }
   }
 }
@@ -270,5 +296,8 @@ export default {
     top: 100%;
     background: white;
     z-index: 1;
+  }
+  .vtimeselector__box--is-closed {
+    display: none;
   }
 </style>
