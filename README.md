@@ -38,7 +38,8 @@ export default {
 | displaySeconds                | Boolean          | false               | Display seconds to the input                             |
 | separator                     | String           | ":"                 | Separator symbol                                         |
 | padTime                       | Boolean          | true                | Pads number with a zero                                  |
-| format                        | String           |                     | Time formating string                                    |
+| displayFormat                 | String           |                     | Time formatting string displayed                         |
+| returnFormat                  | String           |                     | Time formatting string returned                          |
 | h24                           | Boolean          | false               | Display 24 hours format                                  |
 | utc                           | Boolean          | false               | Return UTC date format                                   |
 | inline                        | Boolean          | false               | Show the timepicker always open                          |
@@ -79,6 +80,19 @@ These events are emitted on actions in the timepicker
 | mm    | two digits minutes                      | 00 01 ... 58 59 |
 | s     | one digit seconds                       | 0 1 ... 58 59   |
 | ss    | two digits seconds                      | 00 01 ... 58 59 |
+
+## Contributing
+### Documentation
+
+vue-timeselector make a use of [vue-styleguidist](https://vue-styleguidist.github.io/) to generate auto documentation. In order to regenerate it, run the following commands:
+
+``` bash
+# to start style a guide dev server
+npm run styleguide
+
+# to build a static version
+npm run styleguide:build
+```
 
 ## License
 

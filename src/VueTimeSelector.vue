@@ -16,55 +16,98 @@
 </template>
 
 <script>
-import moment from 'moment';
 
+/**
+ * Timeselector component.
+ * @example ../README.md
+ */
 export default {
   name: 'timeselector',
   props: {
+    /**
+    * Data binding
+    * @model
+    */
     value: {
       type: Date
     },
+    /**
+    * Input id property
+    */
     id: {
       type: String
     },
+    /**
+    * Input name property
+    */
     name: {
       type: String
     },
+    /**
+    * Sets html required attribute on input
+    */
     required: {
       type: Boolean,
       default: false
     },
+    /**
+    * Display hours to the input or not
+    */
     displayHours: {
       type: Boolean,
       default: true
     },
+    /**
+    * Display minutes to the input or not
+    */
     displayMinutes: {
       type: Boolean,
       default: true
     },
+    /**
+    * Display seconds to the input or not
+    */
     displaySeconds: {
       type: Boolean,
       default: false
     },
+    /**
+    * Separator symbol
+    */
     separator: {
       type: String,
       default: ':'
     },
+    /**
+    * Pads number with a zero or not
+    */
     padTime: {
       type: Boolean,
       default: false
     },
-    format: {
+    /**
+    * Time formatting string displayed
+    */
+    displayFormat: {
       type: String
     },
+    /**
+    * Display 24 hours format or not
+    */
     h24: {
       type: Boolean,
       default: false
     },
+    /**
+    * Return UTC date format or not
+    */
     utc: {
       type: Boolean,
       default: false
     },
+    /**
+    * Define hours, minutes and seconds interval to the picker
+    */
     interval: {
       type: Object,
       default: function () {
@@ -74,14 +117,6 @@ export default {
           s: 10
         }
       }
-    },
-    minutesInterval: {
-      type: Number,
-      default: 10
-    },
-    secondsInterval: {
-      type: Number,
-      default: 10
     }
   },
   data () {
@@ -142,13 +177,13 @@ export default {
     */
     timeToDisplay () {
       // Inline formating (separator/displayHours... props)
-      if(!this.format)
+      if(!this.displayFormat)
         return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
                 (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.padTime(this.picker.minute) : '')) +
                 (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '');
 
       // RegExp formating (format props)
-      let display = this.format;
+      let display = this.displayFormat;
       this.formater.forEach(format => {
         if (typeof this.displayRules[format] !== 'undefined') {
           // replace time formater
@@ -176,6 +211,7 @@ export default {
     * Set a zero before a one digit number if needed by padTime props
     * @param {Number} - number to analyze
     * @return {String|Number} - the padded number
+    * @public
     */
     pad (time) {
       return this.padTime ? time.toString().padStart(2, '0') : time;
@@ -186,6 +222,7 @@ export default {
     * @param {Number} [interval=1] - interval asked
     * @param {Number} [timeLength=59] - numbered range to work on.
     * @return {Array} - list of times to select
+    * @public
     */
     timeCount (interval = 1, timeLength = 59) {
       return Array.apply(null, {length: timeLength})
@@ -198,12 +235,24 @@ export default {
     * Update of the selected time on the input
     * @param {String} time - kind of time selected (hour, minute, second)
     * @param {Object} e - event listened
-    * @fires selected(Hour|Minute|Second)
-    * @fires input
+    * @emits selected(Hour|Minute|Second)
+
+    * @public
     */
     selectTime (time, e) {
       this.picker[time] = e.target.textContent;
+      /**
+      * Emit selectedHour selectedMinute and selectedSecond depending on what changed
+      * @event selected(Hour|Minute|Second)
+      * @type {Date}
+      */
       this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker[time]);
+
+      /**
+      * Emit event because input has changed
+      * @event input
+      * @type {Date|Object}
+      */
       this.$emit('input', this.time);
     }
   }

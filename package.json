@@ -3,5 +3,18 @@
   "version": "0.0.1",
   "author": "Alexis Colin <nesquimo@gmail.com>",
   "license": "MIT",
-  "dependencies": {}
+  "scripts": {
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "vue-styleguidist": "^2.1.1",
+    "webpack": "^4.27.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0"
+  }
 }
