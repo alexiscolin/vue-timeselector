@@ -3,21 +3,23 @@
     <input type="text"
            readonly="readonly"
            autocomplete="off"
+           class="vtimeselector__input"
            v-model="timeToDisplay"
            :id="id"
            :required="required"
            :name="name"
+           :class="{'vtimeselector__input--is-open': !picker.isClosed}"
            @click="togglePicker">
 
     <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
-        <ul>
-          <li v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', $event)">{{hour}}</li>
+        <ul class="vtimeselector__box__list vtimeselector__box__list--hours">
+          <li class="vtimeselector__box__item vtimeselector__box__item--hours" v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', $event)">{{hour}}</li>
         </ul>
-        <ul>
-          <li v-for="(minute, index) in timeCount(interval.m)" :key="index" @click="selectTime('minute', $event)">{{minute}}</li>
+        <ul class="vtimeselector__box__list vtimeselector__box__list--minutes">
+          <li class="vtimeselector__box__item vtimeselector__box__item--minutes" v-for="(minute, index) in timeCount(interval.m)" :key="index" @click="selectTime('minute', $event)">{{minute}}</li>
         </ul>
-        <ul v-if="displaySeconds">
-          <li v-for="(second, index) in timeCount(interval.s)" :key="index" @click="selectTime('second', $event)">{{second}}</li>
+        <ul v-if="displaySeconds" class="vtimeselector__box__list vtimeselector__box__list--seconds">
+          <li class="vtimeselector__box__item vtimeselector__box__item--seconds" v-for="(second, index) in timeCount(interval.s)" :key="index" @click="selectTime('second', $event)">{{second}}</li>
         </ul>
     </div>
   </div>
@@ -266,9 +268,7 @@ export default {
     },
 
     /**
-    * Toggle timepocker in order to open or close the select modal
-    * @emits opened
-    * @emits closed
+    * Toggle Picker in order to open or close the select modal
     * @public
     */
     togglePicker () {
@@ -277,7 +277,7 @@ export default {
       /**
       * Emit opened|closed modal event
       * @event opened|closed
-      * @type {Node}
+      * @type {null}
       */
       this.picker.isClosed ? this.$emit('closed', this.$el) : this.$emit('opened', this.$el);
     }
@@ -295,7 +295,7 @@ export default {
     left: 0;
     top: 100%;
     background: white;
-    z-index: 1;
+    z-index: 999;
   }
   .vtimeselector__box--is-closed {
     display: none;
