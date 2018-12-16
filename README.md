@@ -23,6 +23,20 @@ export default {
 }
 ```
 
+## Usage
+### Basic Usage
+
+...
+
+### Customized Time Format
+
+...
+
+### Use classes to curstomize elements
+
+...
+
+
 ## Available props
 
 | Prop                          | Type             | Default             | Description                                              |

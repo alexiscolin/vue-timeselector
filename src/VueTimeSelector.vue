@@ -280,7 +280,25 @@ export default {
       * @type {null}
       */
       this.picker.isClosed ? this.$emit('closed', this.$el) : this.$emit('opened', this.$el);
+    },
+
+    /**
+    * Close timepicker when user has clicked outside of the element
+    * @param {Object} e - click event listened
+    * @public
+    */
+    close(e) {
+      if (!this.$el.contains(e.target) && this.$el !== e.target) {
+        this.togglePicker()
+      }
     }
+  },
+  created() {
+    window.addEventListener('click', this.close)
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('click', this.close)
   }
 }
 </script>
@@ -289,6 +307,7 @@ export default {
   .vtimeselector {
     position: relative;
   }
+  
   .vtimeselector__box {
     position: absolute;
     display: flex;
@@ -297,7 +316,8 @@ export default {
     background: white;
     z-index: 999;
   }
-  .vtimeselector__box--is-closed {
-    display: none;
-  }
+  .vtimeselector__box--is-closed { display: none; }
+
+  .vtimeselector__box__item { cursor: pointer; }
+
 </style>
