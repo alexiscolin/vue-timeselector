@@ -78,3 +78,7 @@ These events are emitted on actions in the timepicker
 | mm    | two digits minutes                      | 00 01 ... 58 59 |
 | s     | one digit seconds                       | 0 1 ... 58 59   |
 | ss    | two digits seconds                      | 00 01 ... 58 59 |
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
