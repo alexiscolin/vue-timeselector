@@ -1,6 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = {
   components: 'src/**/[A-Z]*.vue',
+  styleguideDir: 'docs',
   webpackConfig: {
     module: {
       rules: [
