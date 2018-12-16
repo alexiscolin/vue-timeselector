@@ -1,7 +1,7 @@
 <template>
-  <div class="vtimeselctor">
+  <div class="vtimeselector">
     <input type="text" :id="id" :required="required" :name="name" readonly="readonly" autocomplete="off" v-model="timeToDisplay" @input="$emit('input', $event.target.value)">
-    <div class="vtimeselctor__box">
+    <div class="vtimeselector__box">
         <ul>
           <li v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', $event)">{{hour}}</li>
         </ul>
@@ -95,7 +95,7 @@ export default {
   },
   computed: {
     /**
-    * @desc Get 24|12 hours mode
+    * Get 24|12 hours mode
     * @return {Number} - function to generate time replacement
     */
     hoursLength () {
@@ -103,7 +103,7 @@ export default {
     },
 
     /**
-    * @desc Rules that defines time replacement in regex
+    * Rules that defines time replacement in regex
     * @return {Object} - function to generate time replacement
     */
     displayRules () {
@@ -130,7 +130,7 @@ export default {
     },
 
     /**
-    * @desc Generate a time format depending on formating props
+    * Generate a time format depending on formating props
     * @return {String} - formated time
     */
     timeToDisplay () {
@@ -156,7 +156,7 @@ export default {
     },
 
     /**
-    * @desc Get time as date Object
+    * Get time as date Object
     * @return {Date} - Time as a date Object
     */
     time () {
@@ -164,15 +164,34 @@ export default {
     }
   },
   methods: {
+    /**
+    * Set a zero before a one digit number if needed by padTime props
+    * @param {Number} - number to analyze
+    * @return {String|Number} - the padded number
+    */
     pad (time) {
       return this.padTime ? time.toString().padStart(2, '0') : time;
     },
+
+    /**
+    * Create time interval in list
+    * @param {Number} [interval=1] - interval asked
+    * @param {Number} [timeLength=59] - numbered range to work on.
+    * @return {Array} - list of times to select
+    */
     timeCount (interval = 1, timeLength = 59) {
       return Array.apply(null, {length: timeLength})
              .map(Number.call, Number => timeLength < 59 ? (!this.h24 ? Number + 1 : Number) : Number )
              .filter(num => num % interval === 0)
              .map(time => this.pad(time));
     },
+
+    /**
+    * Update of the selected time on the input
+    * @param {String} time - kind of time selected (hour, minute, second)
+    * @param {Object} e - event listened
+    * @fires selected(Hour|Minute|Second)
+    */
     selectTime (time, e) {
       this.picker[time] = e.target.textContent;
       this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker[time]);
@@ -182,10 +201,10 @@ export default {
 </script>
 
 <style>
-  .vtimeselctor {
+  .vtimeselector {
     position: relative;
   }
-  .vtimeselctor__box {
+  .vtimeselector__box {
     position: absolute;
     display: flex;
     left: 0;
