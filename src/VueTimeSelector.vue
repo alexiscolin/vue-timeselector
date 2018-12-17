@@ -183,7 +183,7 @@ export default {
       type: Object,
       default: function () {
         return {
-          h: [2],
+          h: null,
           m: null,
           s: null,
           ampm: null
