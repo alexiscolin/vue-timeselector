@@ -221,7 +221,8 @@ export default {
     */
     time () {
       this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
-      return this.utc ? new Date(Date.UTC(this.value.getFullYear(), this.value.getMonth(), this.value.getDate(), this.picker.hour, this.picker.minute, this.picker.second)) : new Date(this.picker.time);
+      const date = this.value ? this.value : new Date();
+      return this.utc ? new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), this.picker.hour, this.picker.minute, this.picker.second)) : new Date(this.picker.time);
     }
   },
   methods: {
