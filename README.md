@@ -34,7 +34,24 @@ export default {
 
 ### Use classes to curstomize elements
 
-...
+#### Classes structure
+
+```
+.vtimeselector
+|
+|----- .vtimeselector__input
+|----- .vtimeselector__box
+|      |
+|      | ----- .vtimeselector__box__list .vtimeselector__box__list--hours
+|      |       | ----- vtimeselector__box__item .vtimeselector__box__item--hours
+|      |
+|      | ----- .vtimeselector__box__list .vtimeselector__box__list--minutes
+|      |       | ----- vtimeselector__box__item .vtimeselector__box__item--minutes
+|      |
+|      | ----- .vtimeselector__box__list .vtimeselector__box__list--seconds
+|      |       | ----- vtimeselector__box__item .vtimeselector__box__item--seconds
+
+```
 
 
 ## Available props
