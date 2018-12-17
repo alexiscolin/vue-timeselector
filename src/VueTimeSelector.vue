@@ -386,13 +386,17 @@ export default {
   },
 
   created() {
+    /** Get preselected time @see timeCount */
+    ['hour', 'minute', 'second'].forEach(type => (this.picker.selected[type] = this.picker[type] && this.pad(this.picker[type])));
+
     /** To bind click outside of the event @see close */
-    window.addEventListener('click', this.close)
+    window.addEventListener('click', this.close);
+
   },
 
   /** To unbind click outside of the event @see close */
   beforeDestroy() {
-    window.removeEventListener('click', this.close)
+    window.removeEventListener('click', this.close);
   }
 }
 </script>
