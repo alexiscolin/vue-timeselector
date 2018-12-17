@@ -44,7 +44,7 @@ export default {
 | value                         | Date / Null      |                     | Date value of the timepicker                             |
 | name                          | String           |                     | Input name property                                      |
 | id                            | String           |                     | Input id                                                 |
-| placeholder                   | String           | `TODO`              | Input placeholder text                                   |
+| placeholder                   | String           |                     | Input placeholder text                                   |
 | required                      | Boolean          | false               | Sets html required attribute on input                    |
 | disabled                      | Boolean          | false               | If true, disable timepicker on screen                    |
 | displayHours                  | Boolean          | true                | Display hours to the input                               |
