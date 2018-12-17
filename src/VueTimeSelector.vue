@@ -293,10 +293,13 @@ export default {
       }
     }
   },
+
   created() {
+    /** To bind click outside of the event @see close */
     window.addEventListener('click', this.close)
   },
 
+  /** To unbind click outside of the event @see close */
   beforeDestroy() {
     window.removeEventListener('click', this.close)
   }
@@ -307,7 +310,7 @@ export default {
   .vtimeselector {
     position: relative;
   }
-  
+
   .vtimeselector__box {
     position: absolute;
     display: flex;
