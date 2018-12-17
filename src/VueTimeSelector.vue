@@ -13,18 +13,21 @@
 
     <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
         <ul class="vtimeselector__box__list vtimeselector__box__list--hours" v-if="displayHours">
+          <li class="vtimeselector__box__head">HH</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--hours"
               v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.hour === hour, 'timeselector__box__item--is-highlighted': getState('hour', 'highlight', hour), 'timeselector__box__item--is-disabled': getState('hour', 'disable', hour)}"
               @click="selectTime('hour', hour, $event)">{{hour}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--minutes" v-if="displayMinutes">
+          <li class="vtimeselector__box__head">mm</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--minutes"
               v-for="(minute, index) in timeCount(interval.m)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.minute === minute, 'timeselector__box__item--is-highlighted': getState('minute', 'highlight', minute), 'timeselector__box__item--is-disabled': getState('minute', 'disable', minute)}"
               @click="selectTime('minute', minute, $event)">{{minute}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="displaySeconds">
+          <li class="vtimeselector__box__head">ss</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--seconds"
               v-for="(second, index) in timeCount(interval.s)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getState('second', 'highlight', second), 'timeselector__box__item--is-disabled': getState('second', 'disable', second)}"
@@ -360,10 +363,10 @@ export default {
     },
 
     /**
-    * Check if time had to be highlighted
+    * Check if time had to chage in specific state (ie. highlight, disable...)
     * @param {String} type - type of time (hour, minute, second)
     * @param {Number} time - time to check
-    * @return {Boolean} - is the time had to be highlighted
+    * @return {Boolean} - is the time had to change
     * @public
     */
     getState (type, state, time) {
@@ -395,24 +398,57 @@ export default {
 </script>
 
 <style>
-  .vtimeselector {
-    position: relative;
-  }
+  .vtimeselector { position: relative; }
 
   .vtimeselector__box {
     position: absolute;
     display: flex;
     left: 0;
     top: 100%;
+    width: 100%;
+    height: 10em;
     background: white;
     z-index: 999;
   }
+
   .vtimeselector__box--is-closed { display: none; }
 
   .vtimeselector__box__item { cursor: pointer; }
 
-  .timeselector__box__item--is-highlighted { background: orange; }
-  .timeselector__box__item--is-selected { background: red; }
-  .timeselector__box__item--is-disabled { background: grey; }
+  .vtimeselector__box__list {
+    list-style: none;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 
+  .vtimeselector__box__list + .vtimeselector__box__list {
+    border-left: 1px solid #ffffff;
+  }
+
+  .vtimeselector__box__head {
+    color: #a5a5a5;
+    font-size: .8em;
+    padding: .8em 0 .4em;
+  }
+
+  .vtimeselector__box__item {
+    padding: .4em 0;
+    font-size: 1em;
+  }
+
+  .vtimeselector__box__item:not(.timeselector__box__item--is-disabled):not(.timeselector__box__item--is-selected):hover {
+    background: #d3d3d3;
+  }
+
+  .timeselector__box__item--is-highlighted { background: orange; }
+  .timeselector__box__item--is-selected {
+    background: #05cfb5;
+    color: #ffffff;
+  }
+  .timeselector__box__item--is-disabled {
+    cursor: auto;
+    background: #f5f5f5;
+    color: #a5a5a5;
+  }
 </style>
