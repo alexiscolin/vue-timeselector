@@ -61,6 +61,13 @@ export default {
       default: false
     },
     /**
+    * Disable input
+    */
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    /**
     * Display hours to the input or not
     */
     displayHours: {
@@ -106,7 +113,7 @@ export default {
     */
     h24: {
       type: Boolean,
-      default: false
+      default: true
     },
     /**
     * Return UTC date format or not
@@ -251,20 +258,22 @@ export default {
     * @public
     */
     selectTime (time, e) {
-      this.picker[time] = e.target.textContent;
-      /**
-      * Emit selectedHour selectedMinute and selectedSecond depending on what changed
-      * @event selected(Hour|Minute|Second)
-      * @type {Date}
-      */
-      this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker[time]);
+      if (!this.disabled) {
+        this.picker[time] = e.target.textContent;
+        /**
+        * Emit selectedHour selectedMinute and selectedSecond depending on what changed
+        * @event selected(Hour|Minute|Second)
+        * @type {Date}
+        */
+        this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker[time]);
 
-      /**
-      * Emit event because input has changed
-      * @event input
-      * @type {Date|Object}
-      */
-      this.$emit('input', this.time);
+        /**
+        * Emit event because input has changed
+        * @event input
+        * @type {Date|Object}
+        */
+        this.$emit('input', this.time);
+      }
     },
 
     /**
@@ -272,14 +281,16 @@ export default {
     * @public
     */
     togglePicker () {
-      this.picker.isClosed = !this.picker.isClosed;
+      if (!this.disabled) {
+        this.picker.isClosed = !this.picker.isClosed;
 
-      /**
-      * Emit opened|closed modal event
-      * @event opened|closed
-      * @type {null}
-      */
-      this.picker.isClosed ? this.$emit('closed', this.$el) : this.$emit('opened', this.$el);
+        /**
+        * Emit opened|closed modal event
+        * @event opened|closed
+        * @type {null}
+        */
+        this.picker.isClosed ? this.$emit('closed', this.$el) : this.$emit('opened', this.$el);
+      }
     },
 
     /**
@@ -288,7 +299,7 @@ export default {
     * @public
     */
     close(e) {
-      if (!this.$el.contains(e.target) && this.$el !== e.target) {
+      if (!this.$el.contains(e.target) && this.$el !== e.target && !this.picker.isClosed) {
         this.togglePicker()
       }
     }

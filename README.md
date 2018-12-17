@@ -46,16 +46,16 @@ export default {
 | id                            | String           |                     | Input id                                                 |
 | placeholder                   | String           | `TODO`              | Input placeholder text                                   |
 | required                      | Boolean          | false               | Sets html required attribute on input                    |
-| disabled                      | Boolean          | `TODO`              | If true, disable timepicker on screen                    |
+| disabled                      | Boolean          | false               | If true, disable timepicker on screen                    |
 | displayHours                  | Boolean          | true                | Display hours to the input                               |
 | displayMinutes                | Boolean          | true                | Display minutes to the input                             |
 | displaySeconds                | Boolean          | false               | Display seconds to the input                             |
-| separator                     | String           | ":"                 | Separator symbol                                         |
-| padTime                       | Boolean          | true                | Pads number with a zero                                  |
+| separator                     | String           | ":"                 | Separator symbol used if no displayFormat                |
+| padTime                       | Boolean          | true                | Pads number with a zero (both input and modal)           |
 | displayFormat                 | String           |                     | Time formatting string displayed                         |
 | returnFormat                  | String           |                     | Time formatting string returned                          |
 | h24                           | Boolean          | false               | Display 24 hours format                                  |
-| utc                           | Boolean          | false               | Return UTC date format                                   |
+| utc                           | Boolean          | true                | Return UTC date format                                   |
 | inline                        | Boolean          | false               | Show the timepicker always open                          |
 | initialView                   | Boolean          | false               | Open on the first                                        |
 | interval                      | Object           | {h:1, m:10, s:10}   | Define hours, minutes and seconds interval to the picker |
