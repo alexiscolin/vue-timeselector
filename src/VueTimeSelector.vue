@@ -48,6 +48,12 @@ export default {
       type: String
     },
     /**
+    * Input placeholder text
+    */
+    placeholder: {
+      type: String
+    },
+    /**
     * Input name property
     */
     name: {
@@ -144,7 +150,8 @@ export default {
         second: this.value ? this.value.getSeconds() : 0,
         long: false,
         time: new Date(),
-        isClosed: true
+        isClosed: true,
+        isPristine: true
       },
       formater: ['HH', 'H', 'hh', 'h', 'kk', 'k', 'mm', 'm', 'ss', 's'],
       longHourCount: 24,
@@ -194,6 +201,9 @@ export default {
     * @return {String} - formated time
     */
     timeToDisplay () {
+      if(this.placeholder && this.picker.isPristine)
+        return this.placeholder;
+
       // Inline formating (separator/displayHours... props)
       if(!this.displayFormat)
         return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
@@ -260,6 +270,7 @@ export default {
     */
     selectTime (time, e) {
       if (!this.disabled) {
+        this.picker.isPristine = false;
         this.picker[time] = e.target.textContent;
         /**
         * Emit selectedHour selectedMinute and selectedSecond depending on what changed
