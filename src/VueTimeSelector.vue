@@ -39,7 +39,7 @@ export default {
     * @model
     */
     value: {
-      type: Date
+      type: [String, Date]
     },
     /**
     * Input id property
@@ -120,7 +120,7 @@ export default {
     */
     utc: {
       type: Boolean,
-      default: false
+      default: true
     },
     /**
     * Define hours, minutes and seconds interval to the picker
