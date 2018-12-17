@@ -16,25 +16,19 @@
           <li class="vtimeselector__box__item vtimeselector__box__item--hours"
               v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.hour === hour, 'timeselector__box__item--is-highlighted': getHighlight('hour', hour)}"
-              @click="selectTime('hour', hour, $event)">
-                {{hour}}
-          </li>
+              @click="selectTime('hour', hour, $event)">{{hour}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--minutes" v-if="displayMinutes">
           <li class="vtimeselector__box__item vtimeselector__box__item--minutes"
               v-for="(minute, index) in timeCount(interval.m)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.minute === minute, 'timeselector__box__item--is-highlighted': getHighlight('minute', minute)}"
-              @click="selectTime('minute', minute, $event)">
-                {{minute}}
-          </li>
+              @click="selectTime('minute', minute, $event)">{{minute}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="displaySeconds">
           <li class="vtimeselector__box__item vtimeselector__box__item--seconds"
               v-for="(second, index) in timeCount(interval.s)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getHighlight('second', second)}"
-              @click="selectTime('second', second, $event)">
-                {{second}}
-          </li>
+              @click="selectTime('second', second, $event)">{{second}}</li>
         </ul>
     </div>
   </div>
@@ -157,7 +151,7 @@ export default {
       }
     },
     /**
-    * Hightligth defined time on hours, minutes and seconds
+    * Define hours, minutes and seconds that had to be hightlighted on the picker
     */
     highlight: {
       type: Object,
