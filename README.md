@@ -80,13 +80,13 @@ export default {
 | separator                     | String           | ":"                 | Separator symbol used if no displayFormat                |
 | padTime                       | Boolean          | true                | Pads number with a zero (both input and modal)           |
 | displayFormat                 | String           |                     | Time formatting string displayed                         |
-| returnFormat                  | String           |                     | Time formatting string returned                          |
+| returnFormat                  | String           | `TODO`              | Time formatting string returned                          |
 | h24                           | Boolean          | false               | Display 24 hours format                                  |
 | utc                           | Boolean          | true                | Return UTC date format                                   |
 | inline                        | Boolean          | false               | Show the timepicker always open                          |
 | initialView                   | Boolean          | false               | Open on the first                                        |
 | interval                      | Object           | {h:1, m:10, s:10}   | Define hours, minutes and seconds interval to the picker |
-| highlight                     | Object           | `TODO`              | Hightligth defined time on hours, minutes and seconds    |
+| highlight                     | Object           |                     | Hightligth defined time on hours, minutes and seconds    |
 | disableTime                   | Object           | `TODO`              | disable specific time on hours, minutes and seconds      |
 | pickerStyle                   | String           | `TODO`              | Set the timepicker style                                 |
 

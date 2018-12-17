@@ -13,13 +13,28 @@
 
     <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
         <ul class="vtimeselector__box__list vtimeselector__box__list--hours" v-if="displayHours">
-          <li class="vtimeselector__box__item vtimeselector__box__item--hours" v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', hour, $event)" :class="{highlight: picker.selected.hour === hour}">{{hour}}</li>
+          <li class="vtimeselector__box__item vtimeselector__box__item--hours"
+              v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index"
+              :class="{'timeselector__box__item--is-selected': picker.selected.hour === hour, 'timeselector__box__item--is-highlighted': getHighlight('hour', hour)}"
+              @click="selectTime('hour', hour, $event)">
+                {{hour}}
+          </li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--minutes" v-if="displayMinutes">
-          <li class="vtimeselector__box__item vtimeselector__box__item--minutes" v-for="(minute, index) in timeCount(interval.m)" :key="index" @click="selectTime('minute', minute, $event)" :class="{highlight: picker.selected.minute === minute}">{{minute}}</li>
+          <li class="vtimeselector__box__item vtimeselector__box__item--minutes"
+              v-for="(minute, index) in timeCount(interval.m)" :key="index"
+              :class="{'timeselector__box__item--is-selected': picker.selected.minute === minute, 'timeselector__box__item--is-highlighted': getHighlight('minute', minute)}"
+              @click="selectTime('minute', minute, $event)">
+                {{minute}}
+          </li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="displaySeconds">
-          <li class="vtimeselector__box__item vtimeselector__box__item--seconds" v-for="(second, index) in timeCount(interval.s)" :key="index" @click="selectTime('second', second, $event)" :class="{highlight: picker.selected.second === second}">{{second}}</li>
+          <li class="vtimeselector__box__item vtimeselector__box__item--seconds"
+              v-for="(second, index) in timeCount(interval.s)" :key="index"
+              :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getHighlight('second', second)}"
+              @click="selectTime('second', second, $event)">
+                {{second}}
+          </li>
         </ul>
     </div>
   </div>
@@ -140,7 +155,20 @@ export default {
           s: 10
         }
       }
-    }
+    },
+    /**
+    * Hightligth defined time on hours, minutes and seconds
+    */
+    highlight: {
+      type: Object,
+      default: function () {
+        return {
+          hour: null,
+          minute: null,
+          second: null
+        }
+      }
+    },
   },
   data () {
     return {
@@ -273,17 +301,17 @@ export default {
     * @emits input
     * @public
     */
-    selectTime (time, el, e) {
+    selectTime (type, el, e) {
       if (!this.disabled) {
         this.picker.isPristine = false;
-        this.picker[time] = e.target.textContent;
-        this.picker.selected[time] = el;
+        this.picker[type] = e.target.textContent;
+        this.picker.selected[type] = el;
         /**
         * Emit selectedHour selectedMinute and selectedSecond depending on what changed
         * @event selected(Hour|Minute|Second)
         * @type {Date}
         */
-        this.$emit(`selected${time.charAt(0).toUpperCase()}`, this.picker[time]);
+        this.$emit(`selected${type.charAt(0).toUpperCase()}`, this.picker[type]);
 
         /**
         * Emit event because input has changed
@@ -320,6 +348,20 @@ export default {
       if (!this.$el.contains(e.target) && this.$el !== e.target && !this.picker.isClosed) {
         this.togglePicker()
       }
+    },
+
+    /**
+    * Check if time had to be highlighted
+    * @param {String} type - type of time (hour, minute, second)
+    * @param {Number} time - time to check
+    * @public
+    */
+    getHighlight (type, time) {
+      if (this.highlight[type]) {
+        const timeToCheck = parseInt(time, 10);
+        const highlightToCheck = this.highlight[type].map(h => parseInt(h, 10));
+        return highlightToCheck.indexOf(timeToCheck) >= 0;
+      }
     }
   },
 
@@ -352,6 +394,7 @@ export default {
 
   .vtimeselector__box__item { cursor: pointer; }
 
-  .highlight { background: red; }
+  .timeselector__box__item--is-highlighted { background: orange; }
+  .timeselector__box__item--is-selected { background: red; }
 
 </style>
