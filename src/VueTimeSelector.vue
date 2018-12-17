@@ -157,9 +157,9 @@ export default {
       type: Object,
       default: function () {
         return {
-          hour: null,
-          minute: null,
-          second: null
+          h: null,
+          m: null,
+          s: null
         }
       }
     },
@@ -348,12 +348,20 @@ export default {
     * Check if time had to be highlighted
     * @param {String} type - type of time (hour, minute, second)
     * @param {Number} time - time to check
+    * @return {Boolean} - is the time had to be highlighted
     * @public
     */
     getHighlight (type, time) {
-      if (this.highlight[type]) {
+      if (this.highlight[type.charAt(0)]) {
         const timeToCheck = parseInt(time, 10);
-        const highlightToCheck = this.highlight[type].map(h => parseInt(h, 10));
+        const highlightToCheck = this.highlight[type.charAt(0)].map(h => {
+          if (h instanceof Date && Object.prototype.toString.call(h) === '[object Date]') {
+            h = type === 'hour' ? h.getHours() : (type === 'minute' ? h.getMinutes() : h.getSeconds());
+          }
+
+          return parseInt(h, 10)
+        });
+
         return highlightToCheck.indexOf(timeToCheck) >= 0;
       }
     }
