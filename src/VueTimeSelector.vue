@@ -13,13 +13,13 @@
 
     <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
         <ul class="vtimeselector__box__list vtimeselector__box__list--hours" v-if="displayHours">
-          <li class="vtimeselector__box__item vtimeselector__box__item--hours" v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', $event)">{{hour}}</li>
+          <li class="vtimeselector__box__item vtimeselector__box__item--hours" v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index" @click="selectTime('hour', hour, $event)" :class="{highlight: picker.selected.hour === hour}">{{hour}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--minutes" v-if="displayMinutes">
-          <li class="vtimeselector__box__item vtimeselector__box__item--minutes" v-for="(minute, index) in timeCount(interval.m)" :key="index" @click="selectTime('minute', $event)">{{minute}}</li>
+          <li class="vtimeselector__box__item vtimeselector__box__item--minutes" v-for="(minute, index) in timeCount(interval.m)" :key="index" @click="selectTime('minute', minute, $event)" :class="{highlight: picker.selected.minute === minute}">{{minute}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="displaySeconds">
-          <li class="vtimeselector__box__item vtimeselector__box__item--seconds" v-for="(second, index) in timeCount(interval.s)" :key="index" @click="selectTime('second', $event)">{{second}}</li>
+          <li class="vtimeselector__box__item vtimeselector__box__item--seconds" v-for="(second, index) in timeCount(interval.s)" :key="index" @click="selectTime('second', second, $event)" :class="{highlight: picker.selected.second === second}">{{second}}</li>
         </ul>
     </div>
   </div>
@@ -148,7 +148,11 @@ export default {
         hour: this.value ? this.value.getHours() : 0,
         minute: this.value ? this.value.getMinutes() : 0,
         second: this.value ? this.value.getSeconds() : 0,
-        long: false,
+        selected: {
+          hour: null,
+          minute: null,
+          second: null
+        },
         time: new Date(),
         isClosed: true,
         isPristine: true
@@ -157,7 +161,8 @@ export default {
       longHourCount: 24,
       shortHourCount: 12,
       minCount: 60,
-      secCount: 60
+      secCount: 60,
+
     }
   },
   computed: {
@@ -268,10 +273,11 @@ export default {
     * @emits input
     * @public
     */
-    selectTime (time, e) {
+    selectTime (time, el, e) {
       if (!this.disabled) {
         this.picker.isPristine = false;
         this.picker[time] = e.target.textContent;
+        this.picker.selected[time] = el;
         /**
         * Emit selectedHour selectedMinute and selectedSecond depending on what changed
         * @event selected(Hour|Minute|Second)
@@ -345,5 +351,7 @@ export default {
   .vtimeselector__box--is-closed { display: none; }
 
   .vtimeselector__box__item { cursor: pointer; }
+
+  .highlight { background: red; }
 
 </style>

@@ -36,6 +36,8 @@ export default {
 
 #### Classes structure
 
+##### Block - Elements
+
 ```
 .vtimeselector
 |
@@ -52,6 +54,14 @@ export default {
 |      |       | ----- vtimeselector__box__item .vtimeselector__box__item--seconds
 
 ```
+
+##### Mofifiers
+
+`.vtimeselector__input--is-open`
+`.vtimeselector__box--is-closed`
+`.timeselector__box__item--is-highlighted`
+`.timeselector__box__item--is-selected`
+`.timeselector__box__item--is-disabled`
 
 
 ## Available props
