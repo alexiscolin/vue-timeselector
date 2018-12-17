@@ -33,7 +33,18 @@
               :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getState('second', 'highlight', second), 'timeselector__box__item--is-disabled': getState('second', 'disable', second)}"
               @click="selectTime('second', second, $event)">{{second}}</li>
         </ul>
+        <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="!h24">
+          <li class="vtimeselector__box__head">AM / PM</li>
+          <li class="vtimeselector__box__item vtimeselector__box__item--ampm"
+              :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'AM', 'timeselector__box__item--is-highlighted': getState('ampm', 'highlight', 'AM'), 'timeselector__box__item--is-disabled': getState('ampm', 'disable', 'AM')}"
+              @click="selectTime('ampm', 'AM', $event)">AM</li>
+          <li class="vtimeselector__box__item vtimeselector__box__item--ampm"
+              :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'PM', 'timeselector__box__item--is-highlighted': getState('ampm', 'highlight', 'PM'), 'timeselector__box__item--is-disabled': getState('ampm', 'disable', 'PM')}"
+              @click="selectTime('ampm', 'PM', $event)">PM</li>
+        </ul>
     </div>
+    {{ picker.time }}
+    {{ time }}
   </div>
 </template>
 
@@ -148,7 +159,7 @@ export default {
       default: function () {
         return {
           h: 1,
-          m: 10,
+          m: 1,
           s: 10
         }
       }
@@ -162,7 +173,8 @@ export default {
         return {
           h: null,
           m: null,
-          s: null
+          s: null,
+          ampm: null
         }
       }
     },
@@ -173,9 +185,10 @@ export default {
       type: Object,
       default: function () {
         return {
-          h: null,
+          h: [2],
           m: null,
-          s: null
+          s: null,
+          ampm: null
         }
       }
     }
@@ -183,13 +196,15 @@ export default {
   data () {
     return {
       picker: {
-        hour: this.value ? this.value.getHours() : 0,
-        minute: this.value ? this.value.getMinutes() : 0,
-        second: this.value ? this.value.getSeconds() : 0,
+        hour: this.value ? (this.utc ? this.value.getUTCHours() : this.value.getHours()) : 0,
+        minute: this.value ? (this.utc ? this.value.getUTCMinutes() : this.value.getMinutes()) : 0,
+        second: this.value ? (this.utc ? this.value.getUTCSeconds() : this.value.getSeconds()) : 0,
+        ampm: !this.h24 ? 'AM' : null,
         selected: {
           hour: null,
           minute: null,
-          second: null
+          second: null,
+          ampm: null
         },
         time: new Date(),
         isClosed: true,
@@ -199,8 +214,7 @@ export default {
       longHourCount: 24,
       shortHourCount: 12,
       minCount: 60,
-      secCount: 60,
-
+      secCount: 60
     }
   },
   computed: {
@@ -273,6 +287,20 @@ export default {
     * @return {Date} - Time as a date Object
     */
     time () {
+      // Change time format with AM-PM depending on choice
+      if (!this.h24 && this.picker.ampm !== null) {
+        const hour = parseInt(this.picker.hour, 10);
+        switch (this.picker.ampm){
+          case 'AM':
+            this.picker.hour = hour >= 12 ? hour - 12 : hour;
+            break;
+          case 'PM':
+            this.picker.hour = hour <= 12 ? hour + 12 : hour;
+            break;
+        }
+      }
+
+      // Set hours in final Date format
       this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
       const date = this.value ? this.value : new Date();
       return this.utc ? new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), this.picker.hour, this.picker.minute, this.picker.second)) : new Date(this.picker.time);
@@ -323,7 +351,7 @@ export default {
         * @event selected(Hour|Minute|Second)
         * @type {Date}
         */
-        this.$emit(`selected${type.charAt(0).toUpperCase()}`, this.picker[type]);
+        this.$emit(`selected${type.charAt(0).toUpperCase() + type.slice(1)}`, this.picker[type]);
 
         /**
         * Emit event because input has changed
@@ -371,23 +399,34 @@ export default {
     */
     getState (type, state, time) {
       if (this[state][type.charAt(0)]) {
-        const timeToCheck = parseInt(time, 10);
-        const timeAskedList = this[state][type.charAt(0)].map(h => {
+        const parsedTime = parseInt(time, 10);
+        const  timeAskedList = this[state][type.charAt(0)].map(h => {
           if (h instanceof Date && Object.prototype.toString.call(h) === '[object Date]') {
             h = type === 'hour' ? h.getHours() : (type === 'minute' ? h.getMinutes() : h.getSeconds());
           }
 
-          return parseInt(h, 10)
+          return !isNaN(parsedTime) ? parseInt(h, 10) : h
         });
 
-        return timeAskedList.indexOf(timeToCheck) >= 0;
+        return timeAskedList.indexOf(parsedTime) >= 0;
       }
     }
   },
 
   created() {
     /** Get preselected time @see timeCount */
+    let firstHour;
+    if (!this.h24 && this.value) {
+      const hour = firstHour = this.utc ? this.value.getUTCHours() : this.value.getHours();
+      this.picker.selected.ampm = hour <= 12 ? 'AM' : 'PM';
+      this.picker.ampm = hour <= 12 ? 'AM' : 'PM';
+      this.picker.hour = hour >= 12 ? hour - 12 : hour;
+    }
     ['hour', 'minute', 'second'].forEach(type => (this.picker.selected[type] = this.picker[type] && this.pad(this.picker[type])));
+
+    // Get 24h again for input datetime format
+    if (!this.h24)
+      this.picker.hour = firstHour;
 
     /** To bind click outside of the event @see close */
     window.addEventListener('click', this.close);
@@ -445,7 +484,7 @@ export default {
     background: #d3d3d3;
   }
 
-  .timeselector__box__item--is-highlighted { background: orange; }
+  .timeselector__box__item--is-highlighted { background: #5b64f7; }
   .timeselector__box__item--is-selected {
     background: #05cfb5;
     color: #ffffff;

@@ -106,6 +106,7 @@ These events are emitted on actions in the timepicker
 | selectedHour      | Date       | An hour has been selected            |
 | selectedMinute    | Date       | A minute has been selected           |
 | selectedSecond    | Date       | A second has been selected           |
+| selectedAmpm      | String     | A ampm field has been selected       |
 | selectedDisabled  | Object     | A disabled time has been selected    |
 | input             | Date       | Input value has been modified        |
 | cleared           |            | Selected time has been cleared       |
