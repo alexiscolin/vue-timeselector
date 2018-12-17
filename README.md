@@ -58,9 +58,13 @@ export default {
 ##### Mofifiers
 
 `.vtimeselector__input--is-open`
+
 `.vtimeselector__box--is-closed`
+
 `.timeselector__box__item--is-highlighted`
+
 `.timeselector__box__item--is-selected`
+
 `.timeselector__box__item--is-disabled`
 
 
@@ -87,7 +91,7 @@ export default {
 | initialView                   | Boolean          | false               | Open on the first                                        |
 | interval                      | Object           | {h:1, m:10, s:10}   | Define hours, minutes and seconds interval to the picker |
 | highlight                     | Object           |                     | Hightligth defined time on hours, minutes and seconds    |
-| disableTime                   | Object           | `TODO`              | disable specific time on hours, minutes and seconds      |
+| disable                       | Object           |                     | Disable specific time on hours, minutes and seconds      |
 | pickerStyle                   | String           | `TODO`              | Set the timepicker style                                 |
 
 

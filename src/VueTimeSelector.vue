@@ -15,19 +15,19 @@
         <ul class="vtimeselector__box__list vtimeselector__box__list--hours" v-if="displayHours">
           <li class="vtimeselector__box__item vtimeselector__box__item--hours"
               v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index"
-              :class="{'timeselector__box__item--is-selected': picker.selected.hour === hour, 'timeselector__box__item--is-highlighted': getHighlight('hour', hour)}"
+              :class="{'timeselector__box__item--is-selected': picker.selected.hour === hour, 'timeselector__box__item--is-highlighted': getState('hour', 'highlight', hour), 'timeselector__box__item--is-disabled': getState('hour', 'disable', hour)}"
               @click="selectTime('hour', hour, $event)">{{hour}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--minutes" v-if="displayMinutes">
           <li class="vtimeselector__box__item vtimeselector__box__item--minutes"
               v-for="(minute, index) in timeCount(interval.m)" :key="index"
-              :class="{'timeselector__box__item--is-selected': picker.selected.minute === minute, 'timeselector__box__item--is-highlighted': getHighlight('minute', minute)}"
+              :class="{'timeselector__box__item--is-selected': picker.selected.minute === minute, 'timeselector__box__item--is-highlighted': getState('minute', 'highlight', minute), 'timeselector__box__item--is-disabled': getState('minute', 'disable', minute)}"
               @click="selectTime('minute', minute, $event)">{{minute}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="displaySeconds">
           <li class="vtimeselector__box__item vtimeselector__box__item--seconds"
               v-for="(second, index) in timeCount(interval.s)" :key="index"
-              :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getHighlight('second', second)}"
+              :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getState('second', 'highlight', second), 'timeselector__box__item--is-disabled': getState('second', 'disable', second)}"
               @click="selectTime('second', second, $event)">{{second}}</li>
         </ul>
     </div>
@@ -163,6 +163,19 @@ export default {
         }
       }
     },
+    /**
+    * Disable specific time on hours, minutes and seconds
+    */
+    disable: {
+      type: Object,
+      default: function () {
+        return {
+          h: null,
+          m: null,
+          s: null
+        }
+      }
+    }
   },
   data () {
     return {
@@ -296,10 +309,12 @@ export default {
     * @public
     */
     selectTime (type, el, e) {
-      if (!this.disabled) {
+      // If not disable (input as select box item)
+      if (!this.disabled && !this.getState(type, 'disable', el)) {
         this.picker.isPristine = false;
         this.picker[type] = e.target.textContent;
         this.picker.selected[type] = el;
+
         /**
         * Emit selectedHour selectedMinute and selectedSecond depending on what changed
         * @event selected(Hour|Minute|Second)
@@ -351,10 +366,10 @@ export default {
     * @return {Boolean} - is the time had to be highlighted
     * @public
     */
-    getHighlight (type, time) {
-      if (this.highlight[type.charAt(0)]) {
+    getState (type, state, time) {
+      if (this[state][type.charAt(0)]) {
         const timeToCheck = parseInt(time, 10);
-        const highlightToCheck = this.highlight[type.charAt(0)].map(h => {
+        const timeAskedList = this[state][type.charAt(0)].map(h => {
           if (h instanceof Date && Object.prototype.toString.call(h) === '[object Date]') {
             h = type === 'hour' ? h.getHours() : (type === 'minute' ? h.getMinutes() : h.getSeconds());
           }
@@ -362,7 +377,7 @@ export default {
           return parseInt(h, 10)
         });
 
-        return highlightToCheck.indexOf(timeToCheck) >= 0;
+        return timeAskedList.indexOf(timeToCheck) >= 0;
       }
     }
   },
@@ -398,5 +413,6 @@ export default {
 
   .timeselector__box__item--is-highlighted { background: orange; }
   .timeselector__box__item--is-selected { background: red; }
+  .timeselector__box__item--is-disabled { background: grey; }
 
 </style>
