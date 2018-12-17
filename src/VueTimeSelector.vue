@@ -43,8 +43,6 @@
               @click="selectTime('ampm', 'PM', $event)">PM</li>
         </ul>
     </div>
-    {{ picker.time }}
-    {{ time }}
   </div>
 </template>
 
@@ -149,7 +147,7 @@ export default {
     */
     utc: {
       type: Boolean,
-      default: true
+      default: false
     },
     /**
     * Define hours, minutes and seconds interval to the picker
@@ -159,7 +157,7 @@ export default {
       default: function () {
         return {
           h: 1,
-          m: 1,
+          m: 10,
           s: 10
         }
       }
@@ -417,7 +415,7 @@ export default {
     /** Get preselected time @see timeCount */
     let firstHour;
     if (!this.h24 && this.value) {
-      const hour = firstHour = this.utc ? this.value.getUTCHours() : this.value.getHours();
+      const hour = firstHour = this.utc ? this.value.getUTCHours() : this.value.getHours()
       this.picker.selected.ampm = hour <= 12 ? 'AM' : 'PM';
       this.picker.ampm = hour <= 12 ? 'AM' : 'PM';
       this.picker.hour = hour >= 12 ? hour - 12 : hour;
@@ -425,7 +423,7 @@ export default {
     ['hour', 'minute', 'second'].forEach(type => (this.picker.selected[type] = this.picker[type] && this.pad(this.picker[type])));
 
     // Get 24h again for input datetime format
-    if (!this.h24)
+    if (!this.h24 && this.value)
       this.picker.hour = firstHour;
 
     /** To bind click outside of the event @see close */
@@ -442,6 +440,10 @@ export default {
 
 <style>
   .vtimeselector { position: relative; }
+
+  .vtimeselector__input {
+    width: 100%;
+  }
 
   .vtimeselector__box {
     position: absolute;
@@ -461,6 +463,7 @@ export default {
   .vtimeselector__box__list {
     list-style: none;
     flex: 1;
+    text-align: center;
     overflow-x: hidden;
     overflow-y: auto;
   }
