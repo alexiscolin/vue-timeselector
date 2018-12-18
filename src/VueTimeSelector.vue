@@ -33,7 +33,7 @@
               :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getState('second', 'highlight', second), 'timeselector__box__item--is-disabled': getState('second', 'disable', second)}"
               @click="selectTime('second', second, $event)">{{second}}</li>
         </ul>
-        <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="!h24">
+        <ul class="vtimeselector__box__list vtimeselector__box__list--ampm"  v-if="!h24">
           <li class="vtimeselector__box__head">AM / PM</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--ampm"
               :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'AM', 'timeselector__box__item--is-highlighted': getState('ampm', 'highlight', 'AM'), 'timeselector__box__item--is-disabled': getState('ampm', 'disable', 'AM')}"

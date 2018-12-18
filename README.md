@@ -36,6 +36,8 @@ export default {
 
 #### Classes structure
 
+vue-timeselector is built following [BEM]](http://getbem.com/) guidelines so it's easy for everyone to overrides the component's styles for each elements and their modifiers. Here is that classes structure.
+
 ##### Block - Elements
 
 ```
@@ -52,20 +54,23 @@ export default {
 |      |
 |      | ----- .vtimeselector__box__list .vtimeselector__box__list--seconds
 |      |       | ----- vtimeselector__box__item .vtimeselector__box__item--seconds
+|      |
+|      | ----- .vtimeselector__box__list .vtimeselector__box__list--ampm
+|      |       | ----- vtimeselector__box__item .vtimeselector__box__item--ampm
 
 ```
 
 ##### Mofifiers
 
-`.vtimeselector__input--is-open`
+- **`.vtimeselector__input--is-open`**: Modifier displayed on `.vtimeselector__input` element when the modal is opened
 
-`.vtimeselector__box--is-closed`
+- **`.vtimeselector__box--is-closed`**: Modifier displayed on `.vtimeselector__box` element when the modal is closed
 
-`.timeselector__box__item--is-highlighted`
+- **`.timeselector__box__item--is-highlighted`**: Modifier displayed on `.timeselector__box__item` element when the item is highlighted
 
-`.timeselector__box__item--is-selected`
+- **`.timeselector__box__item--is-selected`**: Modifier displayed on `.timeselector__box__item` element when the item is selected
 
-`.timeselector__box__item--is-disabled`
+- **`.timeselector__box__item--is-disabled`**: Modifier displayed on `.timeselector__box__item` element when the item is disabled
 
 
 ## Available props
