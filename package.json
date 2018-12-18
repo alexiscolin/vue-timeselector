@@ -4,17 +4,39 @@
   "author": "Alexis Colin <nesquimo@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "test": "jest",
     "styleguide": "vue-styleguidist server",
     "styleguide:build": "vue-styleguidist build"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@vue/test-utils": "^1.0.0-beta.27",
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
+    "jest": "^23.6.0",
+    "regenerator-runtime": "^0.13.1",
+    "vue-jest": "^3.0.2",
     "vue-styleguidist": "^2.1.1",
+    "vue-test-utils": "^1.0.0-beta.11",
     "webpack": "^4.27.1"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^vue$": "vue/dist/vue.common.js"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    }
   }
 }

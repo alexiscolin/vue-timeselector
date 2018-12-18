@@ -223,6 +223,17 @@ These events are emitted on actions in the timepicker
 | ss    | two digits seconds                      | 00 01 ... 58 59 |
 
 ## Contributing
+### Tests
+
+Component tests are made using [Jest](https://jestjs.io/) and are written inside the `tests` folder. You can start a test session by running the following commands:
+
+``` bash
+
+npm test
+yarn test
+
+```
+
 ### Documentation
 
 vue-timeselector make a use of [vue-styleguidist](https://vue-styleguidist.github.io/) to generate auto documentation. In order to regenerate it, run the following commands:
