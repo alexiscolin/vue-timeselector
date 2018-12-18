@@ -28,12 +28,57 @@ export default {
 
 ...
 
+* value
+* name
+* id
+* required
+* disabled
+* placeholder
+
+* emit events
+* v-model
+* inline / initialView (todo)
+
+### Custom modal
+
+* displayHours
+* displayMinutes
+* displaySeconds
+
 ### Customized Time Format
+
+* displayed
+* returned
+* utc
+* separator
 
 ...
 
-### Use classes to curstomize elements
 
+### 12 Hours in modal
+
+...
+
+### Interval in modal
+
+...
+
+### Highligth time
+
+...
+
+### Disable time
+
+...
+
+### Slot (TODO)
+
+...
+
+### Style sdelector (TODO)
+
+
+### Use classes to curstomize elements
 #### Classes structure
 
 vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's easy for everyone to overrides the component's styles for each elements and their modifiers. Here is that classes structure.
