@@ -19,7 +19,6 @@
     "regenerator-runtime": "^0.13.1",
     "vue-jest": "^3.0.2",
     "vue-styleguidist": "^2.1.1",
-    "vue-test-utils": "^1.0.0-beta.11",
     "webpack": "^4.27.1"
   },
   "dependencies": {
