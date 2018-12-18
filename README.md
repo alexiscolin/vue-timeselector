@@ -1,6 +1,10 @@
 # vue-timeselector
 🕒 Simple customizable Vue.js timepicker component
 
+![Travis (.org)](https://travis-ci.com/alexiscolin/vue-timeselector.svg?branch=master)
+![David](https://img.shields.io/david/alexiscolin/vue-timeselector.svg)
+![NpmLicense](https://img.shields.io/npm/l/vue-timeselector.svg)
+
 ## Install
 
 ``` bash
