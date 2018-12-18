@@ -36,7 +36,7 @@ export default {
 
 #### Classes structure
 
-vue-timeselector is built following [BEM]](http://getbem.com/) guidelines so it's easy for everyone to overrides the component's styles for each elements and their modifiers. Here is that classes structure.
+vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's easy for everyone to overrides the component's styles for each elements and their modifiers. Here is that classes structure.
 
 ##### Block - Elements
 
