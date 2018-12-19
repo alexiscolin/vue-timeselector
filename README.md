@@ -39,40 +39,45 @@ value prop if passed should be a Date object in order to pass a preconfigured ti
 
 ``` html
 <script>
-var state = {
-  time: new Date() // or null
+export default {
+  components: { Timeselector },
+  data() {
+    return {
+      time: new Date() // or null
+    }
+  }
 }
 </script>
-<timeselector :value="state.date"></timeselector>
+<timeselector :value="time"></timeselector>
 ```
 Using `v-model`
 ``` html
-<datepicker v-model="state.date"></datepicker>
+<datepicker v-model="time"></datepicker>
 ```
 
 Support name attribute for normal html form submission
 ``` html
-<datepicker :value="state.date" :name="uniquename"></datepicker>
+<datepicker :value="time" :name="uniquename"></datepicker>
 ```
 
 Support id attribute as well
 ``` html
-<datepicker :value="state.date" :id="uniqueid"></datepicker>
+<datepicker :value="time" :id="uniqueid"></datepicker>
 ```
 
 Make a use of state attributes like disabled or required
 ``` html
-<datepicker :value="state.date" :required="true" :disabled="false"></datepicker>
+<datepicker :value="time" :required="true" :disabled="false"></datepicker>
 ```
 
 Choose a placeholder as default views (need more tests)
 ``` html
-<datepicker :value="state.date" :placeholder="'Select a time'"></datepicker>
+<datepicker :value="time" :placeholder="'Select a time'"></datepicker>
 ```
 
 Emits events
 ``` html
-<datepicker @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc">
+<datepicker :value="time" @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc">
 ```
 
 ### Custom modal
@@ -122,7 +127,7 @@ vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's
 ##### Block - Elements
 
 ```
-.vtimeselector
+| .vtimeselector
 |
 |----- .vtimeselector__input
 |----- .vtimeselector__box
