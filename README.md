@@ -38,8 +38,14 @@ export default {
 value prop if passed should be a Date object in order to pass a preconfigured time or Null if you want to set the picker default time as `00:00`.
 
 ``` html
+
+<template>
+  <timeselector :value="time"></timeselector>
+</template>
+
 <script>
 export default {
+  name: 'myComponent',
   components: { Timeselector },
   data() {
     return {
@@ -48,7 +54,7 @@ export default {
   }
 }
 </script>
-<timeselector :value="time"></timeselector>
+
 ```
 Using `v-model`
 ``` html
@@ -127,6 +133,7 @@ vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's
 ##### Block - Elements
 
 ```
+
 | .vtimeselector
 |
 |----- .vtimeselector__input
