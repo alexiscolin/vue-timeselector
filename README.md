@@ -86,11 +86,20 @@ Emits events
 <timeselector :value="time" @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc"></timeselector>
 ```
 
+**All [props](#available-props) are listed in the props array below**
+**All [events](#events) are listed in the event array below***
+
 ### Custom modal
 
-* displayHours
-* displayMinutes
-* displaySeconds
+Vue-timeselector component let you choose what kind of information you want to display in the modal box (aka the picker). You can choose to give your users access to **hours**, **minutes**, **seconds**. Furthermore, you can disable any of them by using the following props:
+
+* `:displayHours="false"` - {Boolean} *optionnal* - default: `true`
+* `:displayMinutes="false"` - {Boolean} *optionnal* - default: `true`
+* `:displaySeconds="false"` - {Boolean} *optionnal* - default: `false`
+
+Displays options doesn't act on the time format you see in the input field. You need to use custom time formatting props to change it.
+
+Also, keep in mind that *AM-PM options* appear automatically in the modal by passing the prop `h24` to `false` (`:h24="false"`) - see [here](#12-hours-in-modal) to learn more about it.
 
 ### Customized Time Format
 
@@ -102,7 +111,7 @@ Emits events
 ...
 
 
-### 12 Hours in modal
+### 12 hours in modal
 
 ...
 
@@ -118,11 +127,11 @@ Emits events
 
 ...
 
-### Slot (TODO)
+### Slots (TODO)
 
 ...
 
-### Style sdelector (TODO)
+### Style selector (TODO)
 
 
 ### Use classes to curstomize elements
