@@ -58,32 +58,32 @@ export default {
 ```
 Using `v-model`
 ``` html
-<datepicker v-model="time"></datepicker>
+<timeselector v-model="time"></timeselector>
 ```
 
 Support name attribute for normal html form submission
 ``` html
-<datepicker :value="time" :name="uniquename"></datepicker>
+<timeselector :value="time" :name="uniquename"></timeselector>
 ```
 
 Support id attribute as well
 ``` html
-<datepicker :value="time" :id="uniqueid"></datepicker>
+<timeselector :value="time" :id="uniqueid"></timeselector>
 ```
 
 Make a use of state attributes like disabled or required
 ``` html
-<datepicker :value="time" :required="true" :disabled="false"></datepicker>
+<timeselector :value="time" :required="true" :disabled="false"></timeselector>
 ```
 
 Choose a placeholder as default views (need more tests)
 ``` html
-<datepicker :value="time" :placeholder="'Select a time'"></datepicker>
+<timeselector :value="time" :placeholder="'Select a time'"></timeselector>
 ```
 
 Emits events
 ``` html
-<datepicker :value="time" @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc">
+<timeselector :value="time" @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc"></timeselector>
 ```
 
 ### Custom modal
