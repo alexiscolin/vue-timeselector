@@ -90,7 +90,7 @@ Emits events
 
 **All [props](#available-props) are listed in the props array below**
 
-**All [events](#events) are listed in the event array below***
+**All [events](#events) are listed in the event array below**
 
 ### Custom modal box
 
@@ -106,10 +106,17 @@ Also, keep in mind that *AM-PM options* appears automatically in the modal box b
 
 ### Customized Time Format
 
+Timeselector give the opportunity to customize time displayed and returned *(soon)* format.
+
+By default, timeselector displays time as `HH:mm:ss` (eg, *16:23*) following UTC datetime and 24h format. Time type displayed depends on the modal you have chosen in the modalbox props.
+
+You can change the separator by setting it in the *separator* props : `:separator="':'"`. Default separator is `:` symbol.
+
+The best option to fully custom time displayed in the input is to use the *displayFormat* props : `:displayFormat="'HH[h]mm : ss'"`.
+
 * displayed
 * returned
 * utc
-* separator
 
 #### String formatter
 
