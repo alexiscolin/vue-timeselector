@@ -50,8 +50,10 @@ export default {
   data() {
     return {
       time: new Date() // or null
+      // ...
     }
   }
+  // ...
 }
 </script>
 
@@ -87,9 +89,10 @@ Emits events
 ```
 
 **All [props](#available-props) are listed in the props array below**
+
 **All [events](#events) are listed in the event array below***
 
-### Custom modal
+### Custom modal box
 
 Vue-timeselector component let you choose what kind of information you want to display in the modal box (aka the picker). You can choose to give your users access to **hours**, **minutes**, **seconds**. Furthermore, you can disable any of them by using the following props:
 
@@ -99,7 +102,7 @@ Vue-timeselector component let you choose what kind of information you want to d
 
 Displays options doesn't act on the time format you see in the input field. You need to use custom time formatting props to change it.
 
-Also, keep in mind that *AM-PM options* appear automatically in the modal by passing the prop `h24` to `false` (`:h24="false"`) - see [here](#12-hours-in-modal) to learn more about it.
+Also, keep in mind that *AM-PM options* appears automatically in the modal box by passing the prop `h24` to `false` (`:h24="false"`) - see [here](#12-hours-in-modal) to learn more about it.
 
 ### Customized Time Format
 
@@ -107,6 +110,21 @@ Also, keep in mind that *AM-PM options* appear automatically in the modal by pas
 * returned
 * utc
 * separator
+
+#### String formatter
+
+| Token | Desc                                    | Example         |
+|-------|-----------------------------------------|-----------------|
+| H     | hour from 0 to 23 (non-zero padded)     | 0 1 ... 22 23   |
+| HH    | hour from 0 to 23 (zero padded)         | 00 01 ... 22 23 |
+| h     | hour from 1 to 12 (non-zero padded)     | 1 2 ... 11 12   |
+| hh    | hour from 1 to 12 (zero padded)         | 01 02 ... 11 12 |
+| k     | hour from 1 to 24 (non-zero padded)     | 1 2 ... 23 24   |
+| kk    | hour from 1 to 24 (zero padded)         | 01 02 ... 23 24 |
+| m     | one digit minutes                       | 0 1 ... 58 59   |
+| mm    | two digits minutes                      | 00 01 ... 58 59 |
+| s     | one digit seconds                       | 0 1 ... 58 59   |
+| ss    | two digits seconds                      | 00 01 ... 58 59 |
 
 ...
 
@@ -229,23 +247,7 @@ These events are emitted on actions in the timepicker
 | selectedAmpm      | String     | A ampm field has been selected       |
 | selectedDisabled  | Object     | A disabled time has been selected    |
 | input             | Date       | Input value has been modified        |
-| cleared           |            | Selected time has been cleared       |
-
-## Time formatting
-### String formatter
-
-| Token | Desc                                    | Example         |
-|-------|-----------------------------------------|-----------------|
-| H     | hour from 0 to 23 (non-zero padded)     | 0 1 ... 22 23   |
-| HH    | hour from 0 to 23 (zero padded)         | 00 01 ... 22 23 |
-| h     | hour from 1 to 12 (non-zero padded)     | 1 2 ... 11 12   |
-| hh    | hour from 1 to 12 (zero padded)         | 01 02 ... 11 12 |
-| k     | hour from 1 to 24 (non-zero padded)     | 1 2 ... 23 24   |
-| kk    | hour from 1 to 24 (zero padded)         | 01 02 ... 23 24 |
-| m     | one digit minutes                       | 0 1 ... 58 59   |
-| mm    | two digits minutes                      | 00 01 ... 58 59 |
-| s     | one digit seconds                       | 0 1 ... 58 59   |
-| ss    | two digits seconds                      | 00 01 ... 58 59 |
+| cleared           | `TODO`     | Selected time has been cleared       |
 
 ## Contributing
 ### Tests
