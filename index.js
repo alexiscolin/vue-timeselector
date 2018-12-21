@@ -1,1 +1,1 @@
-module.exports = require('./src/VueTimeSelector.vue');
+module.exports = require('./dist/VueTimeSelector.js');

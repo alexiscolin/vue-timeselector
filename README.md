@@ -268,6 +268,15 @@ yarn test
 
 ```
 
+Also you can start a webpack webdev server on the demo file by running:
+
+``` bash
+
+npm start
+yarn start
+
+```
+
 ### Documentation
 
 vue-timeselector make a use of [vue-styleguidist](https://vue-styleguidist.github.io/) to generate auto documentation. In order to regenerate it, run the following commands:
