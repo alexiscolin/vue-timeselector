@@ -36,10 +36,10 @@
         <ul class="vtimeselector__box__list vtimeselector__box__list--ampm"  v-if="!h24">
           <li class="vtimeselector__box__head">AM / PM</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--ampm"
-              :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'AM', 'timeselector__box__item--is-highlighted': getState('ampm', 'highlight', 'AM'), 'timeselector__box__item--is-disabled': getState('ampm', 'disable', 'AM')}"
+              :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'AM'}"
               @click="selectTime('ampm', 'AM', $event)">AM</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--ampm"
-              :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'PM', 'timeselector__box__item--is-highlighted': getState('ampm', 'highlight', 'PM'), 'timeselector__box__item--is-disabled': getState('ampm', 'disable', 'PM')}"
+              :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'PM'}"
               @click="selectTime('ampm', 'PM', $event)">PM</li>
         </ul>
     </div>
@@ -397,6 +397,7 @@ export default {
     */
     getState (type, state, time) {
       if (this[state][type.charAt(0)]) {
+        console.log('in');
         const parsedTime = parseInt(time, 10);
         const  timeAskedList = this[state][type.charAt(0)].map(h => {
           if (h instanceof Date && Object.prototype.toString.call(h) === '[object Date]') {

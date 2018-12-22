@@ -108,7 +108,7 @@ Also, keep in mind that *AM-PM options* appears automatically in the modal box b
 
 Timeselector give the opportunity to customize time displayed and returned *(soon)* format.
 
-By default, timeselector displays time as `H:mm:ss` (eg, *16:23*) following UTC datetime and 24h format. Time type displayed depends on the modal you have chosen in the modalbox props.
+By default, timeselector displays time as `H:m:s` (eg, *16:5*) following UTC datetime and 24h format. Time type displayed depends on the modal you have chosen in the modalbox props.
 
 You can change the separator by setting it in the *separator* props : `:separator="':'"`. Default separator is `:` symbol.
 
@@ -133,24 +133,50 @@ Finally, the component returns a `Date` object and is complient witj other forma
 | s     | one digit seconds                       | 0 1 ... 58 59   |
 | ss    | two digits seconds                      | 00 01 ... 58 59 |
 
-...
-
 
 ### 12 hours in modal
 
 ...
 
+Don't forget that h24 only affect the modalbox, so you may wish to set `:format` props in a special way in order to display input time in a 12h format (see above).
+
 ### Interval in modal
 
-...
+Vue-timeselector allows you to choose the time interval you want to set for each unit of time in the modalbox. You may want to display only hours that are multiples of two, every minute, and the seconds of the group by ten. To achieve this goal, you only have to fill an object with hours `h`, minutes `m`and seconds `s` keys, that you will set in the `interval` prop.
+
+``` html
+<timeselector :value="time" :interval="{h:2, m:1, s:10}"></timeselector>
+```
+
+Interval prop default value is `{h:1, m:10, s:10}`:
+
+* **hours: 1**: each hours - eache one unit (0, 1, 2, ...)
+* **minutes: 10**: each 10 minutes - eache 10 unit (0, 10, 20, ...)
+* **seconds: 10**: each 10 seconds - eache 10 unit (0, 10, 20, ...)
+
 
 ### Highligth time
 
-...
+Just like interval prop, vue-timeselector allows you to choose an highlight list of times you may want to set for each unit of time in the modalbox. You may want to highlight a special hour, minute or second setting in the modalbox. The `highlight` prop give you the opportunity to do that. And because you may also want to highlight multiple times in the same kind of unit (multiple hours and minutes for exemple), vue-timeselector let you emphasis many of them. To achieve this goal, you only have to fill an object with hours `h`, minutes `m`and seconds `s` keys, and feed them with arrays which contain a list of times you wish your users focus on.
+
+``` html
+<timeselector :value="time" :h24="false" :highlight="{h:[1, 5], m:[10,45,46], s:null}"></timeselector>
+<!-- Will highlight 1h, 5h and 10min, 45min and 46min fields in the modalbox -->
+```
+
+Note that list of numbers are not interval but lists of specific times.
+
 
 ### Disable time
 
-...
+Just like highlight prop, vue-timeselector allows you to choose a disabled list of times you may want to set for each unit of time in the modalbox. You may want to disable a special hour, minute or second setting in the modalbox. The `disable` prop give you the opportunity to do that. And because you may also want to also disable multiple times in the same kind of unit (multiple hours and minutes for exemple), vue-timeselector let you disable many of them. To achieve this goal, you only have to fill an object with hours `h`, minutes `m`and seconds `s` keys, and feed them with arrays which contain a list of times you wish your users focus on.
+
+``` html
+<timeselector :value="time" :h24="false" :disable="{h:[1, 5], m:null, s:[10,20,25]}"></timeselector>
+<!-- Will disable 1h, 5h and 10sec, 20sec and 25sec fields in the modalbox -->
+```
+
+Note that list of numbers are not interval but lists of specific times.
 
 ### Slots (TODO)
 
@@ -267,6 +293,8 @@ npm test
 yarn test
 
 ```
+
+### Server
 
 Also you can start a webpack webdev server on the demo file by running the belowing command. It will open a new window at the `9900` port of your local host.
 
