@@ -108,15 +108,15 @@ Also, keep in mind that *AM-PM options* appears automatically in the modal box b
 
 Timeselector give the opportunity to customize time displayed and returned *(soon)* format.
 
-By default, timeselector displays time as `HH:mm:ss` (eg, *16:23*) following UTC datetime and 24h format. Time type displayed depends on the modal you have chosen in the modalbox props.
+By default, timeselector displays time as `H:mm:ss` (eg, *16:23*) following UTC datetime and 24h format. Time type displayed depends on the modal you have chosen in the modalbox props.
 
 You can change the separator by setting it in the *separator* props : `:separator="':'"`. Default separator is `:` symbol.
 
 The best option to fully custom time displayed in the input is to use the *displayFormat* props : `:displayFormat="'HH[h]mm : ss'"`.
 
-* displayed
-* returned
-* utc
+Time may be set to UTC or not in order to display and return UTC time.
+
+Finally, the component returns a `Date` object and is complient witj other format thanks to `returnFormat` props. This props should be configured in the same way as the `displayFormat` props *(SOON)*.
 
 #### String formatter
 
@@ -268,7 +268,7 @@ yarn test
 
 ```
 
-Also you can start a webpack webdev server on the demo file by running:
+Also you can start a webpack webdev server on the demo file by running the belowing command. It will open a new window at the `9900` port of your local host.
 
 ``` bash
 
