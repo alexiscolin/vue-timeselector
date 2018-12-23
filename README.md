@@ -136,7 +136,7 @@ Finally, the component returns a `Date` object and is complient witj other forma
 
 ### 12 hours in modal
 
-...
+It's easy to set 12h - 24h time mode on vue-timeselector. Just feed the `:h24` prop ith a Boolean. If true, the modalbox will display time until 23h, if false, the modalbox will display time until 12h and a AM-PM option as well.
 
 Don't forget that h24 only affect the modalbox, so you may wish to set `:format` props in a special way in order to display input time in a 12h format (see above).
 
@@ -184,6 +184,7 @@ Note that list of numbers are not interval but lists of specific times.
 
 ### Style selector (TODO)
 
+...
 
 ### Use classes to curstomize elements
 #### Classes structure
