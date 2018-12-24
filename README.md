@@ -320,6 +320,13 @@ npm run styleguide:build
 
 **Component's documentation is available [here](https://alexiscolin.github.io/vue-timeselector/)**
 
+### TODO
+
+* Slots
+* Clear event
+* Picker defined style
+* More tests
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
