@@ -180,7 +180,7 @@ Note that list of numbers are not interval but lists of specific times.
 
 ### Slots (TODO)
 
-...
+Slots will help you to introduce some code or text inside the picker.
 
 ### Style selector (TODO)
 
