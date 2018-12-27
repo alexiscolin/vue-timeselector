@@ -10,6 +10,9 @@
            :name="name"
            :class="{'vtimeselector__input--is-open': !picker.isClosed}"
            @click="togglePicker">
+    <div class="vtimeselector__clear" @click="clearTime">
+      <slot name="clear-ico"><span class="vtimeselector__clear__ico">x</span></slot>
+    </div>
 
     <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
         <ul class="vtimeselector__box__list vtimeselector__box__list--hours" v-if="displayHours">
@@ -361,6 +364,14 @@ export default {
     },
 
     /**
+    * Clear time
+    * @public
+    */
+    clearTime () {
+      console.log('clear')
+    },
+
+    /**
     * Toggle Picker in order to open or close the select modal
     * @public
     */
@@ -444,6 +455,32 @@ export default {
 
   .vtimeselector__input {
     width: 100%;
+    box-sizing: border-box;
+  }
+
+  .vtimeselector__clear {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .vtimeselector__clear__ico {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    color: #a5a5a5;
+    font-family: sans-serif;
+  }
+
+  .vtimeselector__clear:hover .vtimeselector__clear__ico{
+    color: black;
   }
 
   .vtimeselector__box {
