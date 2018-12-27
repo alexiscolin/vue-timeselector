@@ -178,9 +178,24 @@ Just like highlight prop, vue-timeselector allows you to choose a disabled list 
 
 Note that list of numbers are not interval but lists of specific times.
 
-### Slots (TODO)
+### Slots
 
 Slots will help you to introduce some code or text inside the picker.
+
+Slots list:
+
+- `hours`: in order to insert code/text above hours selectbox
+- `minutes`: in order to insert code/text above minutes selectbox
+- `seconds`: in order to insert code/text above seconds selectbox
+- `ampm`: in order to insert code/text above ampm selectbox
+
+``` html
+<timeselector :value="time" :h24="false" :disable="{h:[1, 5], m:null, s:[10,20,25]}">
+  <template slot="hours">
+    <span>Hours</span>
+  </template>
+</timeselector>
+```
 
 ### Style selector (TODO)
 
@@ -322,7 +337,6 @@ npm run styleguide:build
 
 ### TODO
 
-* Slots
 * Clear event
 * Picker defined style
 * More tests

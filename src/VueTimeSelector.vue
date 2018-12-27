@@ -13,28 +13,28 @@
 
     <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
         <ul class="vtimeselector__box__list vtimeselector__box__list--hours" v-if="displayHours">
-          <li class="vtimeselector__box__head">HH</li>
+          <li class="vtimeselector__box__head" slot="hours">HH</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--hours"
               v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.hour === hour, 'timeselector__box__item--is-highlighted': getState('hour', 'highlight', hour), 'timeselector__box__item--is-disabled': getState('hour', 'disable', hour)}"
               @click="selectTime('hour', hour, $event)">{{hour}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--minutes" v-if="displayMinutes">
-          <li class="vtimeselector__box__head">mm</li>
+          <li class="vtimeselector__box__head" slot="minutes">mm</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--minutes"
               v-for="(minute, index) in timeCount(interval.m)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.minute === minute, 'timeselector__box__item--is-highlighted': getState('minute', 'highlight', minute), 'timeselector__box__item--is-disabled': getState('minute', 'disable', minute)}"
               @click="selectTime('minute', minute, $event)">{{minute}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="displaySeconds">
-          <li class="vtimeselector__box__head">ss</li>
+          <li class="vtimeselector__box__head" slot="seconds">ss</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--seconds"
               v-for="(second, index) in timeCount(interval.s)" :key="index"
               :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getState('second', 'highlight', second), 'timeselector__box__item--is-disabled': getState('second', 'disable', second)}"
               @click="selectTime('second', second, $event)">{{second}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--ampm"  v-if="!h24">
-          <li class="vtimeselector__box__head">AM / PM</li>
+          <li class="vtimeselector__box__head" slot="ampm">AM / PM</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--ampm"
               :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'AM'}"
               @click="selectTime('ampm', 'AM', $event)">AM</li>
