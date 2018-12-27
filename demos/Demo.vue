@@ -1,6 +1,10 @@
 <template>
   <div>
-    <timeselector :value="time"></timeselector>
+    <timeselector :value="time">
+      <template slot="hours">
+        <span>hours</span>
+      </template>
+    </timeselector>
   </div>
 </template>
 
