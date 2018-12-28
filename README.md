@@ -188,6 +188,7 @@ Slots list:
 - **`minutes`**: in order to insert code/text above minutes selectbox (default: `mm`)
 - **`seconds`**: in order to insert code/text above seconds selectbox (default: `ss`)
 - **`ampm`**: in order to insert code/text above ampm selectbox (default: `AM / PM`)
+- **`clear-ico`**: in order to insert another icon into the clear button ad symbol (default: `x`)
 
 ``` html
 <timeselector :value="time" :h24="false" :disable="{h:[1, 5], m:null, s:[10,20,25]}">

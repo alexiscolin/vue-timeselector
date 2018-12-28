@@ -364,11 +364,11 @@ export default {
     },
 
     /**
-    * Clear time
+    * Clear time and reset modalbox
     * @public
     */
     clearTime () {
-      console.log('clear')
+      console.log('TODO')
     },
 
     /**
