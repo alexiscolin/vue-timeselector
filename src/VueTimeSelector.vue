@@ -451,7 +451,7 @@ export default {
       this.picker.ampm = hour <= 12 ? 'AM' : 'PM';
       this.picker.hour = hour >= 12 ? hour - 12 : hour;
     }
-    ['hour', 'minute', 'second'].forEach(type => (this.picker.selected[type] = this.picker[type] && this.pad(this.picker[type])));
+    this.value !== null && ['hour', 'minute', 'second'].forEach(type => (this.picker.selected[type] = this.picker[type] && this.pad(this.picker[type])));
 
     // Get 24h again for input datetime format
     if (!this.h24 && this.value)
