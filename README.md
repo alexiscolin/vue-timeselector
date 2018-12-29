@@ -35,7 +35,7 @@ export default {
 <timeselector></timeselector>
 ```
 
-value prop if passed should be a Date object in order to pass a preconfigured time or Null if you want to set the picker default time as `00:00`.
+value prop if passed should be a Date object in order to pass a preconfigured time or Null if you want to set the picker default time as `0:0`.
 
 ``` html
 
