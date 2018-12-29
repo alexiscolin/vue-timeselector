@@ -116,6 +116,7 @@ You can change the separator by setting it in the *separator* props : `:separato
 
 The best option to fully custom time displayed in the input is to use the *displayFormat* props : `:displayFormat="'HH[h]mm : ss'"`.
 
+It's possible to escape a letter used for formatting ("h", "H", "m" ...) by surrounding it with brackets, eg. `HH[h]mm` could render *01h35*.
 Time may be set to UTC or not in order to display and return UTC time.
 
 Finally, the component returns a `Date` object and is complient with other format thanks to `returnFormat` props. This props should be configured in the same way as the `displayFormat` props.
