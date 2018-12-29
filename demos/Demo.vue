@@ -1,7 +1,7 @@
 <template>
   <div>
     {{ time }}
-    <timeselector v-model="time" placeholder="Select a time">
+    <timeselector v-model="time" :utc="false" displayFormat="HH:mm:ss" returnFormat="HH">
       <template slot="hours">
         <span>hours</span>
       </template>

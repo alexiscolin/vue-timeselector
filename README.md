@@ -87,7 +87,7 @@ Choose a placeholder as default views (need more tests)
 
 Emits events
 ``` html
-<timeselector :value="time" @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc"  @cleared="myClearedFunc"></timeselector>
+<timeselector v-model="time" @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc"  @cleared="myClearedFunc"></timeselector>
 ```
 
 **All [props](#available-props) are listed in the props array below**
@@ -118,7 +118,14 @@ The best option to fully custom time displayed in the input is to use the *displ
 
 Time may be set to UTC or not in order to display and return UTC time.
 
-Finally, the component returns a `Date` object and is complient witj other format thanks to `returnFormat` props. This props should be configured in the same way as the `displayFormat` props *(SOON)*.
+Finally, the component returns a `Date` object and is complient with other format thanks to `returnFormat` props. This props should be configured in the same way as the `displayFormat` props.
+
+Please, keep in mind that prop makes the component return a String (and not a date anymore). So `UTC` formatting doesn't affect the returned string that is now the absolute number on which user has clicked.
+
+``` html
+<timeselector v-model="time" returnFormat="HH"></timeselector>
+<!--  Will return "01" after you clicked on "01" (hour) in the timepicker -->
+```
 
 #### String formatter
 
@@ -147,7 +154,7 @@ Don't forget that h24 only affect the modalbox, so you may wish to set `:format`
 Vue-timeselector allows you to choose the time interval you want to set for each unit of time in the modalbox. You may want to display only hours that are multiples of two, every minute, and the seconds of the group by ten. To achieve this goal, you only have to fill an object with hours `h`, minutes `m`and seconds `s` keys, that you will set in the `interval` prop.
 
 ``` html
-<timeselector :value="time" :interval="{h:2, m:1, s:10}"></timeselector>
+<timeselector v-model="time" :interval="{h:2, m:1, s:10}"></timeselector>
 ```
 
 Interval prop default value is `{h:1, m:10, s:10}`:
@@ -162,7 +169,7 @@ Interval prop default value is `{h:1, m:10, s:10}`:
 Just like interval prop, vue-timeselector allows you to choose an highlight list of times you may want to set for each unit of time in the modalbox. You may want to highlight a special hour, minute or second setting in the modalbox. The `highlight` prop give you the opportunity to do that. And because you may also want to highlight multiple times in the same kind of unit (multiple hours and minutes for exemple), vue-timeselector let you emphasis many of them. To achieve this goal, you only have to fill an object with hours `h`, minutes `m`and seconds `s` keys, and feed them with arrays which contain a list of times you wish your users focus on.
 
 ``` html
-<timeselector :value="time" :h24="false" :highlight="{h:[1, 5], m:[10,45,46], s:null}"></timeselector>
+<timeselector v-model="time" :h24="false" :highlight="{h:[1, 5], m:[10,45,46], s:null}"></timeselector>
 <!-- Will highlight 1h, 5h and 10min, 45min and 46min fields in the modalbox -->
 ```
 
@@ -174,7 +181,7 @@ Note that list of numbers are not interval but lists of specific times.
 Just like highlight prop, vue-timeselector allows you to choose a disabled list of times you may want to set for each unit of time in the modalbox. You may want to disable a special hour, minute or second setting in the modalbox. The `disable` prop give you the opportunity to do that. And because you may also want to also disable multiple times in the same kind of unit (multiple hours and minutes for exemple), vue-timeselector let you disable many of them. To achieve this goal, you only have to fill an object with hours `h`, minutes `m`and seconds `s` keys, and feed them with arrays which contain a list of times you wish your users focus on.
 
 ``` html
-<timeselector :value="time" :h24="false" :disable="{h:[1, 5], m:null, s:[10,20,25]}"></timeselector>
+<timeselector v-model="time" :h24="false" :disable="{h:[1, 5], m:null, s:[10,20,25]}"></timeselector>
 <!-- Will disable 1h, 5h and 10sec, 20sec and 25sec fields in the modalbox -->
 ```
 
@@ -193,7 +200,7 @@ Slots list:
 - **`clear-ico`**: in order to insert another icon into the clear button ad symbol (default: `x`)
 
 ``` html
-<timeselector :value="time" :h24="false" :disable="{h:[1, 5], m:null, s:[10,20,25]}">
+<timeselector v-model="time" :h24="false" :disable="{h:[1, 5], m:null, s:[10,20,25]}">
   <template slot="hours">
     <span>Hours</span>
   </template>
@@ -274,7 +281,7 @@ vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's
 | separator                     | String           | ":"                 | Separator symbol used if no displayFormat                |
 | padTime                       | Boolean          | true                | Pads number with a zero (both input and modal)           |
 | displayFormat                 | String           |                     | Time formatting string displayed                         |
-| returnFormat                  | String           | `TODO`              | Time formatting string returned                          |
+| returnFormat                  | String           |                     | Time formatting string returned                          |
 | h24                           | Boolean          | false               | Display 24 hours format                                  |
 | utc                           | Boolean          | true                | Return UTC date format                                   |
 | inline                        | Boolean          | false               | Show the timepicker always open                          |

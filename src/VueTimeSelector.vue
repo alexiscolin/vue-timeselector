@@ -4,7 +4,7 @@
            readonly="readonly"
            autocomplete="off"
            class="vtimeselector__input"
-           v-model="timeToDisplay"
+           :value="timeFormated('displayFormat')"
            :id="id"
            :required="required"
            :name="name"
@@ -139,6 +139,12 @@ export default {
       type: String
     },
     /**
+    * Time formatting string returned
+    */
+    returnFormat: {
+      type: String
+    },
+    /**
     * Display 24 hours format or not
     */
     h24: {
@@ -233,54 +239,25 @@ export default {
     */
     displayRules () {
       return {
-        HH: () => this.pad(this.picker.hour),
+        HH: () => this.pad(this.picker.hour, true),
         H: () => this.picker.hour,
-        kk: () => this.pad(this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour),
+        kk: () => this.pad(this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour, true),
         k: () => this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour,
         hh: () => {
           if (this.h24)
-            return this.pad(this.picker.hour > 12 ? 12 - (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour) : this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour)
-          return this.pad(this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour)
+            return this.pad(this.picker.hour > 12 ? 12 - (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour) : this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour, true)
+          return this.pad(this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour, true)
         },
         h: () => {
           if (this.h24)
             return this.picker.hour > 12 ? 12 - (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour) : (this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour)
           return this.picker.hour === 0 ? this.picker.hour + 1 : this.picker.hour
         },
-        mm: () => this.pad(this.picker.minute),
+        mm: () => this.pad(this.picker.minute, true),
         m: () => this.picker.minute.toString(),
-        ss: () => this.pad(this.picker.second),
+        ss: () => this.pad(this.picker.second, true),
         s: () => this.picker.second.toString()
       }
-    },
-
-    /**
-    * Generate a time format depending on formating props
-    * @return {String} - formated time
-    */
-    timeToDisplay () {
-      if(this.placeholder && this.picker.isPristine)
-        return this.placeholder;
-
-      // Inline formating (separator/displayHours... props)
-      if(!this.displayFormat)
-        return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
-                (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.padTime(this.picker.minute) : '')) +
-                (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '');
-
-      // RegExp formating (format props)
-      let display = this.displayFormat;
-      this.formater.forEach(format => {
-        if (typeof this.displayRules[format] !== 'undefined') {
-          // replace time formater
-          display = display.replace(new RegExp(`${format}(?!\])`, 'g'), this.displayRules[format]());
-
-          // replace time escaped formater
-          display = display.replace(new RegExp(`\\[${format}\\]`, 'g'), format);
-        }
-      });
-
-      return display
     },
 
     /**
@@ -301,10 +278,15 @@ export default {
         }
       }
 
-      if(this.picker.hour === -1 && this.picker.minute === -1)
+      // If cleared
+      if (this.picker.hour === -1 && this.picker.minute === -1)
         return '';
 
-      // Set hours in final Date format
+      // Return formatted return if returnFormat set (absolute time ONLY)
+      if (this.returnFormat)
+        return this.timeFormated('returnFormat')
+
+      // Set hours in final Date format - default
       this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
       const date = this.value ? this.value : new Date();
       return this.utc ? new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), this.picker.hour, this.picker.minute, this.picker.second)) : new Date(this.picker.time);
@@ -313,12 +295,43 @@ export default {
   methods: {
     /**
     * Set a zero before a one digit number if needed by padTime props
-    * @param {Number} - number to analyze
+    * @param {Number} time - number to analyze
+    * @param {Boolean} force - force padding even if padTime is not set
     * @return {String|Number} - the padded number
     * @public
     */
-    pad (time) {
-      return this.padTime ? time.toString().padStart(2, '0') : time;
+    pad (time, force = false) {
+      return this.padTime || force ? time.toString().padStart(2, '0') : time;
+    },
+
+    /**
+    * Generate a time format depending on formating props
+    * @param {String} type - result of formatting
+    * @return {String} - formated time
+    */
+    timeFormated (type) {
+      if(this.placeholder && this.picker.isPristine)
+        return this.placeholder;
+
+      // Inline formating - for display method only - (separator/displayHours... props)
+      if(type === 'displayFormat' && !this.displayFormat)
+        return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
+                (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.padTime(this.picker.minute) : '')) +
+                (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '');
+
+      // RegExp formating (formats props)
+      let display = this[type];
+      this.formater.forEach(format => {
+        if (typeof this.displayRules[format] !== 'undefined') {
+          // replace time formater
+          display = display.replace(new RegExp(`${format}(?!\])`, 'g'), this.displayRules[format]());
+
+          // replace time escaped formater
+          display = display.replace(new RegExp(`\\[${format}\\]`, 'g'), format);
+        }
+      });
+
+      return display
     },
 
     /**
