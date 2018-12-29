@@ -31,7 +31,7 @@ export default {
 ### Basic Usage
 
 ``` html
-<!-- Default to 24-Hour format HH:mm -->
+<!-- Default to 24-Hour format H:m -->
 <timeselector></timeselector>
 ```
 
