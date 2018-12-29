@@ -301,6 +301,13 @@ export default {
         }
       }
 
+      console.log('change');
+
+      if(this.picker.hour === -1 && this.picker.minute === -1) {
+        console.log('ine')
+        return '';
+      }
+
       // Set hours in final Date format
       this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
       const date = this.value ? this.value : new Date();
@@ -368,7 +375,19 @@ export default {
     * @public
     */
     clearTime () {
-      console.log('TODO')
+      this.picker.isPristine = true;
+      this.picker.selected.hour = -1;
+      this.picker.selected.minute = -1;
+      this.picker.selected.second = -1;
+      this.picker.selected.ampm = null;
+
+      this.picker.hour = 0;
+      this.picker.minute = 0;
+      this.picker.second = 0;
+      this.picker.ampm = 'AM';
+
+      this.$emit('input', '');
+      this.$emit('cleared');
     },
 
     /**

@@ -1,10 +1,13 @@
 <template>
   <div>
-    <timeselector :value="time">
+    {{ time }}
+    <timeselector v-model="time" placeholder="Select a time">
       <template slot="hours">
         <span>hours</span>
       </template>
     </timeselector>
+
+
   </div>
 </template>
 
@@ -15,7 +18,7 @@ export default {
   components: { Timeselector },
   data() {
     return {
-      time: new Date()
+      time: null
     }
   }
 }

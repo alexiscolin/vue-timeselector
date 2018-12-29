@@ -40,7 +40,7 @@ value prop if passed should be a Date object in order to pass a preconfigured ti
 ``` html
 
 <template>
-  <timeselector :value="time"></timeselector>
+  <timeselector v-model="time"></timeselector>
 </template>
 
 <script>
@@ -58,34 +58,36 @@ export default {
 </script>
 
 ```
-Using `v-model`
+
+Using `v-modal` lets you benefit of the "two-way-binding" thanks to the `input` event emitted included in the prop. But you can also use `:value` prop in order to inject data in vue-timeselector component and listen the input manualy:
+
 ``` html
-<timeselector v-model="time"></timeselector>
+<timeselector :value="time" @input="myListenerFunc(e)"></timeselector>
 ```
 
 Support name attribute for normal html form submission
 ``` html
-<timeselector :value="time" :name="uniquename"></timeselector>
+<timeselector v-model="time" :name="uniquename"></timeselector>
 ```
 
 Support id attribute as well
 ``` html
-<timeselector :value="time" :id="uniqueid"></timeselector>
+<timeselector v-model="time" :id="uniqueid"></timeselector>
 ```
 
 Make a use of state attributes like disabled or required
 ``` html
-<timeselector :value="time" :required="true" :disabled="false"></timeselector>
+<timeselector v-model="time" :required="true" :disabled="false"></timeselector>
 ```
 
 Choose a placeholder as default views (need more tests)
 ``` html
-<timeselector :value="time" :placeholder="'Select a time'"></timeselector>
+<timeselector v-model="time" :placeholder="'Select a time'"></timeselector>
 ```
 
 Emits events
 ``` html
-<timeselector :value="time" @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc"></timeselector>
+<timeselector :value="time" @input="myInputFunc" @opened="myOpenFunc" @closed="myCloseFunc"  @cleared="myClearedFunc"></timeselector>
 ```
 
 **All [props](#available-props) are listed in the props array below**
@@ -297,7 +299,7 @@ These events are emitted on actions in the timepicker
 | selectedAmpm      | String     | A ampm field has been selected       |
 | selectedDisabled  | Object     | A disabled time has been selected    |
 | input             | Date       | Input value has been modified        |
-| cleared           | `TODO`     | Selected time has been cleared       |
+| cleared           |            | Selected time has been cleared       |
 
 ## Contributing
 ### Tests
