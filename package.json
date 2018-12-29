@@ -1,8 +1,20 @@
 {
   "name": "vue-timeselector",
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "description": "Simple customizable Vue.js timepicker component",
   "author": "Alexis Colin <nesquimo@gmail.com>",
+  "repository": "git+https://github.com/alexiscolin/vue-timeselector.git",
   "license": "MIT",
+  "private": false,
+  "keywords": [
+    "vue",
+    "timepicker",
+    "timeselector",
+    "date",
+    "time",
+    "custom",
+    "vuejs2"
+  ],
   "scripts": {
     "start": "webpack-dev-server --hot --mode development",
     "build": "webpack --mode production",

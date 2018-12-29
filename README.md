@@ -348,7 +348,6 @@ npm run styleguide:build
 
 ### TODO
 
-* Returned time format
 * Picker defined style
 * More tests
 
