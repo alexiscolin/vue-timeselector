@@ -301,12 +301,8 @@ export default {
         }
       }
 
-      console.log('change');
-
-      if(this.picker.hour === -1 && this.picker.minute === -1) {
-        console.log('ine')
+      if(this.picker.hour === -1 && this.picker.minute === -1)
         return '';
-      }
 
       // Set hours in final Date format
       this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
@@ -386,6 +382,8 @@ export default {
       this.picker.second = 0;
       this.picker.ampm = 'AM';
 
+      this.close();
+
       this.$emit('input', '');
       this.$emit('cleared');
     },
@@ -412,8 +410,10 @@ export default {
     * @param {Object} e - click event listened
     * @public
     */
-    close(e) {
-      if (!this.$el.contains(e.target) && this.$el !== e.target && !this.picker.isClosed) {
+    close(e = null) {
+      if (e === null) {
+        !this.picker.isClosed && this.togglePicker();
+      } else if (!this.$el.contains(e.target) && this.$el !== e.target && !this.picker.isClosed) {
         this.togglePicker()
       }
     },
