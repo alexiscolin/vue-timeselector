@@ -407,7 +407,7 @@ export default {
 
     /**
     * Close timepicker when user has clicked outside of the element
-    * @param {Object} e - click event listened
+    * @param {Object} [e=null] - click event listened
     * @public
     */
     close(e = null) {

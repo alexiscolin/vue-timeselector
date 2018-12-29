@@ -340,7 +340,6 @@ npm run styleguide:build
 
 ### TODO
 
-* Clear event
 * Picker defined style
 * More tests
 
