@@ -427,7 +427,6 @@ export default {
     */
     getState (type, state, time) {
       if (this[state][type.charAt(0)]) {
-        console.log('in');
         const parsedTime = parseInt(time, 10);
         const  timeAskedList = this[state][type.charAt(0)].map(h => {
           if (h instanceof Date && Object.prototype.toString.call(h) === '[object Date]') {
