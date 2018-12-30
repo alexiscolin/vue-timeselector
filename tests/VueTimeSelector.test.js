@@ -203,4 +203,24 @@ describe('VueTimeSelector', () => {
     wrapper.findAll('.vtimeselector__box__item--minutes').at(minutes).trigger('click');
     expect(wrapper.emitted().input[1][0]).toBe(`${hours}h${minutes}`);
   });
+
+  /**
+  * Test if click on input open and close the picker
+  */
+  it('Can open and close the picker with emitted event', () => {
+    const wrapper = factory({
+      propsData: {
+        value: null,
+      }
+    });
+
+    const input = wrapper.find('.vtimeselector__input');
+    input.trigger('click');
+    expect(wrapper.find('.vtimeselector__box').classes('vtimeselector__box--is-closed')).toBeFalsy();
+    expect(wrapper.emitted().opened[0][0]).toBeTruthy();
+
+    input.trigger('click');
+    expect(wrapper.find('.vtimeselector__box').classes('vtimeselector__box--is-closed')).toBeTruthy();
+    expect(wrapper.emitted().closed[0][0]).toBeTruthy();
+  });
 })
