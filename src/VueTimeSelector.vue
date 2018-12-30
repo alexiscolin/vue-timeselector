@@ -127,6 +127,13 @@ export default {
       default: ':'
     },
     /**
+    * Open the picker on the first
+    */
+    initialView: {
+      type: Boolean,
+      default: false
+    },
+    /**
     * Pads number with a zero or not
     */
     padTime: {
@@ -481,6 +488,10 @@ export default {
     // Warn if possible AM-PM confusion on selection
     if (!this.h24 && (this.highlight.h && this.highlight.h.length > 0) || (this.disable.h && this.disable.h.length > 0)) {
       console.warn('You shouldn\'t use h24="false" with highlight or disable hour props. It may cause AM-PM confusion or limitation due to multiple hours selected.')
+    }
+
+    if (this.initialView) {
+      this.togglePicker()
     }
 
     /** To bind click outside of the event @see close */
