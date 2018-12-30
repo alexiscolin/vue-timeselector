@@ -7,6 +7,7 @@
                   :h24="false"
                   displayFormat="HH:mm"
                   returnFormat="HH-mm"
+                  placeholder="bonjour"
                   :disable="{h:[16, 5], m: null, s: null}">
       <template slot="hours">
         <span>hours</span>

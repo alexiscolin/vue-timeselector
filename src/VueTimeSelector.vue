@@ -6,6 +6,7 @@
            class="vtimeselector__input"
            :value="timeFormated('displayFormat')"
            :id="id"
+           :disabled="disabled"
            :required="required"
            :name="name"
            :class="{'vtimeselector__input--is-open': !picker.isClosed}"
