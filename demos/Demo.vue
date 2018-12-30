@@ -1,7 +1,13 @@
 <template>
   <div>
-    {{ time }}
-    <timeselector v-model="time" :utc="false" displayFormat="HH:mm" returnFormat="HH">
+    <p>Time: {{ time }}</p>
+      <br><br>
+    <timeselector v-model="time"
+                  :utc="false"
+                  :h24="false"
+                  displayFormat="HH:mm"
+                  returnFormat="HH-mm"
+                  :highlight="{h:[16, 5], m: null, s: null}">
       <template slot="hours">
         <span>hours</span>
       </template>

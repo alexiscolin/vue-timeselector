@@ -5,7 +5,7 @@
 ![David](https://img.shields.io/david/alexiscolin/vue-timeselector.svg)
 ![NpmLicense](https://img.shields.io/npm/l/vue-timeselector.svg)
 
-vue-timeselector is a Vue.js component that give you ability to select a time depending and multiple options. This component has been created in order to be fully and simply customizable and powerfull with many props (format, UTC, 12-24h, optional pickers, highlight, interval, native html attributes and many more...), events (opened picker, closed picker, cleared input...) and slots (icon, headers...). 
+vue-timeselector is a Vue.js component that give you ability to select a time depending and multiple options. This component has been created in order to be fully and simply customizable and powerfull with many props (format, UTC, 12-24h, optional pickers, highlight, interval, native html attributes and many more...), events (opened picker, closed picker, cleared input...) and slots (icon, headers...).
 
 <br><br>
 <p align="center"><img src="http://files.de-jaune-et-de-bleu.com/img/github/vue-timeselector/vue-timeselector-1.png" width="30%"></p>
@@ -180,8 +180,9 @@ Just like interval prop, vue-timeselector allows you to choose an highlight list
 <!-- Will highlight 1h, 5h and 10min, 45min and 46min fields in the modalbox -->
 ```
 
-Note that list of numbers are not interval but lists of specific times.
+You may fill arrays with specific time number or even with DateTime expression eg `:highlight="{h:[new Date], m: null, s: null}">`
 
+Note that list of numbers are not interval but lists of specific times.
 
 ### Disable time
 
@@ -191,6 +192,8 @@ Just like highlight prop, vue-timeselector allows you to choose a disabled list 
 <timeselector v-model="time" :h24="false" :disable="{h:[1, 5], m:null, s:[10,20,25]}"></timeselector>
 <!-- Will disable 1h, 5h and 10sec, 20sec and 25sec fields in the modalbox -->
 ```
+
+You may fill arrays with specific time number or even with DateTime expression eg `:highlight="{h:[new Date], m: null, s: null}">`
 
 Note that list of numbers are not interval but lists of specific times.
 

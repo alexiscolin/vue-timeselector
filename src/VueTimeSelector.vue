@@ -446,7 +446,8 @@ export default {
             h = type === 'hour' ? h.getHours() : (type === 'minute' ? h.getMinutes() : h.getSeconds());
           }
 
-          return !isNaN(parsedTime) ? parseInt(h, 10) : h
+          const timeAction = !isNaN(parsedTime) ? parseInt(h, 10) : h;
+          return this.h24 === false && timeAction > 12 ? timeAction - 12 : timeAction;
         });
 
         return timeAskedList.indexOf(parsedTime) >= 0;
@@ -469,6 +470,10 @@ export default {
     if (!this.h24 && this.value)
       this.picker.hour = firstHour;
 
+    // Warn if possible AM-PM confusion on selection
+    if (!this.h24 && this.highlight.h.length > 0 || this.disable.h.length > 0)
+      console.warn('You shouldn\'t use h24="false" with highlight or disable hour props. It may cause AM-PM confusion due to multiple hours selected.')
+
     /** To bind click outside of the event @see close */
     window.addEventListener('click', this.close);
 
@@ -482,7 +487,10 @@ export default {
 </script>
 
 <style>
-  .vtimeselector { position: relative; }
+  .vtimeselector {
+    position: relative;
+    font-family: sans-serif;
+  }
 
   .vtimeselector__input {
     width: 100%;
@@ -507,7 +515,6 @@ export default {
     text-align: center;
     vertical-align: middle;
     color: #a5a5a5;
-    font-family: sans-serif;
   }
 
   .vtimeselector__clear:hover .vtimeselector__clear__ico{
@@ -531,6 +538,8 @@ export default {
 
   .vtimeselector__box__list {
     list-style: none;
+    padding: 0;
+    margin: 0;
     flex: 1;
     text-align: center;
     overflow-x: hidden;
