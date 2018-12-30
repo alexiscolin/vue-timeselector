@@ -5,6 +5,12 @@
 ![David](https://img.shields.io/david/alexiscolin/vue-timeselector.svg)
 ![NpmLicense](https://img.shields.io/npm/l/vue-timeselector.svg)
 
+vue-timeselector is a Vue.js component that give you ability to select a time depending and multiple options. This component has been created in order to be fully and simply customizable and powerfull with many props (format, UTC, 12-24h, optional pickers, highlight, interval, native html attributes and many more...), events (opened picker, closed picker, cleared input...) and slots (icon, headers...). 
+
+<br><br>
+<p align="center"><img src="http://files.de-jaune-et-de-bleu.com/img/github/vue-timeselector/vue-timeselector-1.png" width="30%"></p>
+<br>
+
 ## Install
 
 ``` bash
@@ -305,7 +311,7 @@ These events are emitted on actions in the timepicker
 | selectedMinute    | Date       | A minute has been selected           |
 | selectedSecond    | Date       | A second has been selected           |
 | selectedAmpm      | String     | A ampm field has been selected       |
-| selectedDisabled  | Object     | A disabled time has been selected    |
+| selectedDisabled  | TODO       | A disabled time has been selected    |
 | input             | Date       | Input value has been modified        |
 | cleared           |            | Selected time has been cleared       |
 
