@@ -376,6 +376,13 @@ export default {
         * @type {Date|Object}
         */
         this.$emit('input', this.time);
+      } else {
+        /**
+        * Emit event because disabled time has been clicked
+        * @event selectedDisabled
+        * @type {Number}
+        */
+        this.$emit('selectedDisabled', el);
       }
     },
 

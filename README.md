@@ -314,7 +314,7 @@ These events are emitted on actions in the timepicker
 | selectedMinute    | Date       | A minute has been selected           |
 | selectedSecond    | Date       | A second has been selected           |
 | selectedAmpm      | String     | A ampm field has been selected       |
-| selectedDisabled  | TODO       | A disabled time has been selected    |
+| selectedDisabled  | Number     | A disabled time has been selected    |
 | input             | Date       | Input value has been modified        |
 | cleared           |            | Selected time has been cleared       |
 
