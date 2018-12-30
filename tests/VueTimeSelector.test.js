@@ -93,4 +93,114 @@ describe('VueTimeSelector', () => {
       expect(wrapper.find('.vtimeselector__input').attributes().disabled).toBeTruthy();
     });
   });
+
+  /**
+  * Test initial view picker open
+  */
+  it('Can be opened when created', () => {
+    [new Date(), null].forEach(type => {
+      const wrapper = factory({
+        propsData: {
+          value: type,
+          initialView: true
+        }
+      });
+
+      expect(wrapper.find('.vtimeselector__box').classes('vtimeselector__box--is-closed')).toBeFalsy();
+    });
+  });
+
+  /**
+  * Test falsy h24 set hours 12 times (and no more) and AMPM picker
+  */
+  it('Display 12h in picker when h24 is disabled', () => {
+    [new Date(), null].forEach(type => {
+      const wrapper = factory({
+        propsData: {
+          value: type,
+          h24: false
+        }
+      });
+
+      expect(wrapper.findAll('.vtimeselector__box__item--hours').length).toEqual(12);
+      expect(wrapper.findAll('.vtimeselector__box__list--ampm').exists()).toBe(true);
+    });
+  });
+
+  /**
+  * Test if display hour prop can display or not the hour picker
+  */
+  it('Achieve to display or not the hour picker', () => {
+    [new Date(), null].forEach(type => {
+      [false,true].forEach(state => {
+        const wrapper = factory({
+          propsData: {
+            value: type,
+            displayHours: state
+          }
+        });
+
+        expect(wrapper.findAll('.vtimeselector__box__list--hours').exists()).toBe(state);
+      })
+    });
+  });
+
+  /**
+  * Test if display minute prop can display or not the minute picker
+  */
+  it('Achieve to display or not the minute picker', () => {
+    [new Date(), null].forEach(type => {
+      [false,true].forEach(state => {
+        const wrapper = factory({
+          propsData: {
+            value: type,
+            displayMinutes: state
+          }
+        });
+
+        expect(wrapper.findAll('.vtimeselector__box__list--minutes').exists()).toBe(state);
+      })
+    });
+  });
+
+  /**
+  * Test if display second prop can display or not the second picker
+  */
+  it('Achieve to display or not the second picker', () => {
+    [new Date(), null].forEach(type => {
+      [false,true].forEach(state => {
+        const wrapper = factory({
+          propsData: {
+            value: type,
+            displaySeconds: state
+          }
+        });
+
+        expect(wrapper.findAll('.vtimeselector__box__list--seconds').exists()).toBe(state);
+      })
+    });
+  });
+
+  /**
+  * Test if returnedFormat return a String
+  */
+  it('Return a string when returnFormat is set', () => {
+    const wrapper = factory({
+      propsData: {
+        value: null,
+        initialView: true,
+        interval: {h:1, m:1, s:1},
+        returnFormat: 'HH[h]mm'
+      }
+    });
+
+    const hours = Math.floor(Math.random() * 23);
+    const minutes = Math.floor(Math.random() * 59);
+
+    wrapper.findAll('.vtimeselector__box__item--hours').at(hours).trigger('click');
+    expect(wrapper.emitted().input[0][0]).toBe(`${hours.toString().padStart(2, '0')}h00`);
+
+    wrapper.findAll('.vtimeselector__box__item--minutes').at(minutes).trigger('click');
+    expect(wrapper.emitted().input[1][0]).toBe(`${hours.toString().padStart(2, '0')}h${minutes.toString().padStart(2, '0')}`);
+  });
 })

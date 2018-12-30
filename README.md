@@ -294,7 +294,6 @@ vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's
 | returnFormat                  | String           |                     | Time formatting string returned                          |
 | h24                           | Boolean          | false               | Display 24 hours format                                  |
 | utc                           | Boolean          | true                | Return UTC date format                                   |
-| inline                        | Boolean          | false               | Show the timepicker always open                          |
 | initialView                   | Boolean          | false               | Open on the first                                        |
 | interval                      | Object           | {h:1, m:10, s:10}   | Define hours, minutes and seconds interval to the picker |
 | highlight                     | Object           |                     | Hightligth defined time on hours, minutes and seconds    |

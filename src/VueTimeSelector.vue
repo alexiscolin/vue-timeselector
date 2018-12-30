@@ -324,7 +324,7 @@ export default {
       // Inline formating - for display method only - (separator/displayHours... props)
       if(type === 'displayFormat' && !this.displayFormat)
         return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
-                (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.padTime(this.picker.minute) : '')) +
+                (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.pad(this.picker.minute) : '')) +
                 (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '');
 
       // RegExp formating (formats props)

@@ -4,11 +4,12 @@
       <br><br>
     <timeselector v-model="time"
                   :utc="false"
-                  :h24="false"
+                  :h24="true"
                   displayFormat="HH:mm"
                   returnFormat="HH-mm"
                   placeholder="bonjour"
-                  :disable="{h:[16], m: null, s: null}">
+                  :initialView="true"
+                  :disable="{h:[16, 5], m: null, s: null}">
       <template slot="hours">
         <span>hours</span>
       </template>
