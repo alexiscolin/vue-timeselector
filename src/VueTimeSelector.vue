@@ -471,8 +471,9 @@ export default {
       this.picker.hour = firstHour;
 
     // Warn if possible AM-PM confusion on selection
-    if (!this.h24 && this.highlight.h.length > 0 || this.disable.h.length > 0)
-      console.warn('You shouldn\'t use h24="false" with highlight or disable hour props. It may cause AM-PM confusion due to multiple hours selected.')
+    if (!this.h24 && (this.highlight.h && this.highlight.h.length > 0) || (this.disable.h && this.disable.h.length > 0)) {
+      console.warn('You shouldn\'t use h24="false" with highlight or disable hour props. It may cause AM-PM confusion or limitation due to multiple hours selected.')
+    }
 
     /** To bind click outside of the event @see close */
     window.addEventListener('click', this.close);

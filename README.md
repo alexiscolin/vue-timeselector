@@ -180,7 +180,7 @@ Just like interval prop, vue-timeselector allows you to choose an highlight list
 <!-- Will highlight 1h, 5h and 10min, 45min and 46min fields in the modalbox -->
 ```
 
-You may fill arrays with specific time number or even with DateTime expression eg `:highlight="{h:[new Date], m: null, s: null}">`
+You may fill arrays with specific time number or even with DateTime expression eg `:highlight="{h:[new Date], m: null, s: null}">`. Also you should avoid use disable hour with `h24` prop set to `false` in order to avoid AM-PM time confusion.
 
 Note that list of numbers are not interval but lists of specific times.
 
@@ -193,7 +193,7 @@ Just like highlight prop, vue-timeselector allows you to choose a disabled list 
 <!-- Will disable 1h, 5h and 10sec, 20sec and 25sec fields in the modalbox -->
 ```
 
-You may fill arrays with specific time number or even with DateTime expression eg `:highlight="{h:[new Date], m: null, s: null}">`
+You may fill arrays with specific time number or even with DateTime expression eg `:highlight="{h:[new Date], m: null, s: null}">`. Also you should avoid use disable hour with `h24` prop set to `false` in order to avoid AM-PM time confusion.
 
 Note that list of numbers are not interval but lists of specific times.
 
