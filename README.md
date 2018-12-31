@@ -2,6 +2,7 @@
 🕒 Simple customizable Vue.js timepicker component
 
 ![Travis (.org)](https://travis-ci.com/alexiscolin/vue-timeselector.svg?branch=master)
+![](https://img.shields.io/node/v/vue-timeselector.svg)
 ![David](https://img.shields.io/david/alexiscolin/vue-timeselector.svg)
 ![NpmLicense](https://img.shields.io/npm/l/vue-timeselector.svg)
 
@@ -351,7 +352,7 @@ npm run styleguide:build
 
 ### TODO
 
-* Add inline script compatibility [by webpack](https://vuejsdevelopers.com/2017/07/31/vue-component-publish-npm/) 
+* Add inline script compatibility [by webpack](https://vuejsdevelopers.com/2017/07/31/vue-component-publish-npm/)
 * Picker defined style
 * More tests
 
