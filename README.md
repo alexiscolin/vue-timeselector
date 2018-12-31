@@ -5,8 +5,7 @@
 ![David](https://img.shields.io/david/alexiscolin/vue-timeselector.svg)
 ![NpmLicense](https://img.shields.io/npm/l/vue-timeselector.svg)
 
-vue-timeselector is a Vue.js component that give you ability to select a time depending and multiple options. This component has been created in order to be fully and simply customizable and powerfull with many props (format, UTC, 12-24h, optional pickers, highlight, interval, native html attributes and many more...), events (opened picker, closed picker, cleared input...) and slots (icon, headers...).
-
+vue-timeselector is a Vue.js component that gives you ability to select a time depending on multiple options. This component has been created in order to be as fully and simply customizable as powerful thanks to props (format, UTC, 12-24h, optional pickers, highlight, interval, native HTML attributes and many more...), events (opened picker, closed picker, cleared input...) and slots (icon, headers...).
 <br><br>
 <p align="center"><img src="http://files.de-jaune-et-de-bleu.com/img/github/vue-timeselector/vue-timeselector-1.png" width="30%"></p>
 <br>
@@ -41,7 +40,7 @@ export default {
 <timeselector></timeselector>
 ```
 
-value prop if passed should be a Date object in order to pass a preconfigured time or Null if you want to set the picker default time as `0:0`.
+Value prop if passed should be a `Date` object in order to inject a preconfigured time or `null` if you want to set the picker default time as `0:0`.
 
 ``` html
 
@@ -65,18 +64,17 @@ export default {
 
 ```
 
-Using `v-modal` lets you benefit of the "two-way-binding" thanks to the `input` event emitted included in the prop. But you can also use `:value` prop in order to inject data in vue-timeselector component and listen the input manualy:
-
+Using `v-modal` lets you benefit of the "two-way-binding" thanks to the `input` emitted event included in the prop. But you can also use `:value` prop in order to inject data in vue-timeselector component and listen the `input` event manualy:
 ``` html
 <timeselector :value="time" @input="myListenerFunc(e)"></timeselector>
 ```
 
-Support name attribute for normal html form submission
+Supports name attribute for normal HTML form submission
 ``` html
 <timeselector v-model="time" :name="uniquename"></timeselector>
 ```
 
-Support id attribute as well
+Supports id attribute as well
 ``` html
 <timeselector v-model="time" :id="uniqueid"></timeselector>
 ```
@@ -86,7 +84,7 @@ Make a use of state attributes like disabled or required
 <timeselector v-model="time" :required="true" :disabled="false"></timeselector>
 ```
 
-Choose a placeholder as default views (need more tests)
+Choose a placeholder as default views
 ``` html
 <timeselector v-model="time" :placeholder="'Select a time'"></timeselector>
 ```
@@ -102,7 +100,7 @@ Emits events
 
 ### Custom modal box
 
-Vue-timeselector component let you choose what kind of information you want to display in the modal box (aka the picker). You can choose to give your users access to **hours**, **minutes**, **seconds**. Furthermore, you can disable any of them by using the following props:
+Vue-timeselector component lets you choose what kind of information you want to display in the modal box (aka the picker). You can choose to give your users access to **hours**, **minutes**, **seconds**. Furthermore, you can disable any of them by using the following props:
 
 * `:displayHours="false"` - {Boolean} *optionnal* - default: `true`
 * `:displayMinutes="false"` - {Boolean} *optionnal* - default: `true`
@@ -114,9 +112,9 @@ Also, keep in mind that *AM-PM options* appears automatically in the modal box b
 
 ### Customized Time Format
 
-Timeselector give the opportunity to customize time displayed and returned *(soon)* format.
+Timeselector give the opportunity to customize time displayed and returned format.
 
-By default, timeselector displays time as `H:m:s` (eg, *16:5*) following UTC datetime and 24h format. Time type displayed depends on the modal you have chosen in the modalbox props.
+By default, timeselector displays time as `H:m` (eg, *16:5*) following UTC datetime and 24h format. Time type displayed depends on modals you have chosen in the modalbox props (`:displayHours`, `:displayMinutes`...).
 
 You can change the separator by setting it in the *separator* props : `:separator="':'"`. Default separator is `:` symbol.
 
@@ -131,7 +129,7 @@ Please, keep in mind that prop makes the component return a String (and not a da
 
 ``` html
 <timeselector v-model="time" returnFormat="HH"></timeselector>
-<!--  Will return "01" after you clicked on "01" (hour) in the timepicker -->
+<!--  Will return "01" after you clicked on "01" (hour) in the timepicker whatever the UTC is set or not -->
 ```
 
 #### String formatter
@@ -152,7 +150,7 @@ Please, keep in mind that prop makes the component return a String (and not a da
 
 ### 12 hours in modal
 
-It's easy to set 12h - 24h time mode on vue-timeselector. Just feed the `:h24` prop ith a Boolean. If true, the modalbox will display time until 23h, if false, the modalbox will display time until 12h and a AM-PM option as well.
+It's easy to set 12h - 24h time mode on vue-timeselector. Just feed the `:h24` prop with a Boolean. If true, the modalbox will display time until 23h, if false, the modalbox will display time until 12h and a AM-PM option as well.
 
 Don't forget that h24 only affect the modalbox, so you may wish to set `:format` props in a special way in order to display input time in a 12h format (see above).
 
@@ -229,7 +227,6 @@ vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's
 ##### Block - Elements
 
 ```
-
 | .vtimeselector
 |
 |----- .vtimeselector__input
@@ -258,8 +255,6 @@ vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's
 |      |       | ----- vtimeselector__box__item .vtimeselector__box__item--ampm
 |      |       | ----- vtimeselector__box__item .vtimeselector__box__item--ampm
 |      |       | ----- ...
-
-
 ```
 
 ##### Mofifiers
@@ -331,7 +326,7 @@ yarn test
 
 ### Server
 
-Also you can start a webpack webdev server on the demo file by running the belowing command. It will open a new window at the `9900` port of your local host.
+Also you can start a webpack webdev server **on the demo file** by running the belowing command. It will open a new window at the `9900` port of your local host.
 
 ``` bash
 
