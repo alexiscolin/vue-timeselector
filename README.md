@@ -351,7 +351,7 @@ npm run styleguide:build
 
 ### TODO
 
-* Require minified version (https://github.com/ktsn/vue-template-loader ?)
+* Add inline script compatibility [by webpack](https://vuejsdevelopers.com/2017/07/31/vue-component-publish-npm/) 
 * Picker defined style
 * More tests
 

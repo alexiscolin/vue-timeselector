@@ -11,10 +11,8 @@ module.exports = {
    path: path.resolve(__dirname, 'dist'),
    filename: '[name].js',
    libraryTarget: 'umd',
-
-  // These options are useful if the user wants to load the module with AMD
-  library: 'vue-timeselector',
-  umdNamedDefine: true
+   library: 'vue-timeselector',
+   umdNamedDefine: true
  },
  module: {
     rules: [
