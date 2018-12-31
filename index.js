@@ -1,1 +1,2 @@
-module.exports = require('./dist/VueTimeSelector.js');
+import vuetimeselector from './dist/VueTimeSelector.js';
+export default vuetimeselector;
