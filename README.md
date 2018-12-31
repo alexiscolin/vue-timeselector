@@ -351,6 +351,7 @@ npm run styleguide:build
 
 ### TODO
 
+* Require minified version (https://github.com/ktsn/vue-template-loader ?)
 * Picker defined style
 * More tests
 

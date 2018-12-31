@@ -1,11 +1,11 @@
 {
   "name": "vue-timeselector",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Simple customizable Vue.js timepicker component",
   "author": "Alexis Colin <nesquimo@gmail.com>",
   "repository": "git+https://github.com/alexiscolin/vue-timeselector.git",
   "license": "MIT",
-  "main": "./dist/VueTimeSelector.js",
+  "main": "./src/VueTimeSelector.vue",
   "private": false,
   "keywords": [
     "vue",
