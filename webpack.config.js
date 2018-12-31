@@ -4,12 +4,17 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: {
-    VueTimeSelector: './index.js',
+    VueTimeSelector: './src/VueTimeSelector.vue',
     demos: './demos/script.js'
   },
   output: {
    path: path.resolve(__dirname, 'dist'),
-   filename: '[name].js'
+   filename: '[name].js',
+   libraryTarget: 'umd',
+
+  // These options are useful if the user wants to load the module with AMD
+  library: 'vue-timeselector',
+  umdNamedDefine: true
  },
  module: {
     rules: [
