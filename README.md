@@ -21,6 +21,7 @@ or
 yarn add vue-timeselector
 ```
 
+ Node bundle installation:
 ``` javascript
 import Timeselector from 'vue-timeselector';
 
@@ -32,6 +33,22 @@ export default {
   // ...
 }
 ```
+
+**OR**
+
+Browser bundle installation:
+``` html
+<body>
+  <div id="app">
+    <timeselector></timeselector>
+  </div>
+  <script type="text/javascript" src="vue-timeselector.js"></script>
+  <script type="text/javascript">
+    Vue.use(VueTimeSelector);
+  </script>
+</body>
+```
+
 
 ## Usage
 ### Basic Usage
@@ -325,7 +342,7 @@ yarn test
 
 ```
 
-### Server
+### Demos server
 
 Also you can start a webpack webdev server **on the demo file** by running the belowing command. It will open a new window at the `9900` port of your local host.
 
@@ -352,7 +369,6 @@ npm run styleguide:build
 
 ### TODO
 
-* Add inline script compatibility [by webpack](https://vuejsdevelopers.com/2017/07/31/vue-component-publish-npm/)
 * Picker defined style
 * More tests
 

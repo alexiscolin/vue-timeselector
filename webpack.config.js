@@ -1,21 +1,9 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-module.exports = {
-  entry: {
-    VueTimeSelector: './src/VueTimeSelector.vue',
-    demos: './demos/script.js'
-  },
-  output: {
-   path: path.resolve(__dirname, 'dist'),
-   filename: '[name].js',
-   libraryTarget: 'umd',
-   library: 'vue-timeselector',
-   umdNamedDefine: true
- },
- module: {
+let commonConfig = {
+  module: {
     rules: [
       {
         test: /\.vue$/,
@@ -33,16 +21,32 @@ module.exports = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin(),
-    new HtmlWebPackPlugin({
-      template: "index.html",
-      filename: "./index.html"
-    })
-  ],
-  devServer: {
-    compress: true,
-    open: true,
-    stats: "errors-only",
-    port: 9900
-  }
+    new VueLoaderPlugin()
+  ]
 };
+
+module.exports = [
+  // Config 1: For browser environment
+  merge(commonConfig, {
+    entry: path.resolve(__dirname + '/src/plugin.js'),
+    output: {
+      filename: 'vue-timeselector.min.js',
+      libraryTarget: 'window',
+      library: 'VueTimeSelector'
+    }
+  }),
+
+  // Config 2: For Node-based development environments
+  merge(commonConfig, {
+    entry: {
+      VueTimeSelector: path.resolve(__dirname + '/src/VueTimeSelector.vue')
+    },
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].js',
+      libraryTarget: 'umd',
+      library: 'vue-timeselector',
+      umdNamedDefine: true
+    }
+  })
+];
