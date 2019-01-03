@@ -13,11 +13,15 @@
     "timeselector",
     "date",
     "time",
+    "picker",
     "custom",
     "vuejs2"
   ],
   "engines": {
     "node": ">= 8.10.0"
+  },
+  "bugs": {
+    "url": "https://github.com/alexiscolin/vue-timeselector/issues"
   },
   "scripts": {
     "start": "webpack-dev-server --hot --mode development --config demos/demos.config.js",
