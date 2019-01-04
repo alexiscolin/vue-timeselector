@@ -390,7 +390,7 @@ export default {
         * @event selectedDisabled
         * @type {Number}
         */
-        this.$emit('selectedDisabled', el);
+        this.$emit('selectedDisabled');
       }
     },
 
