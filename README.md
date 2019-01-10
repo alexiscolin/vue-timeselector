@@ -276,7 +276,7 @@ vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's
 |      |       | ----- ...
 ```
 
-##### Mofifiers
+##### Modifiers
 
 - **`.vtimeselector__input--is-open`**: Modifier displayed on `.vtimeselector__input` element when the modal is opened
 
