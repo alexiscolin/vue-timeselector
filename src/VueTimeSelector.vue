@@ -345,13 +345,13 @@ export default {
     /**
     * Create time interval in list
     * @param {Number} [interval=1] - interval asked
-    * @param {Number} [timeLength=59] - numbered range to work on.
+    * @param {Number} [timeLength=60] - numbered range to work on.
     * @return {Array} - list of times to select
     * @public
     */
-    timeCount (interval = 1, timeLength = 59) {
+    timeCount (interval = 1, timeLength = 60) {
       return Array.apply(null, {length: timeLength})
-             .map(Number.call, Number => timeLength < 59 ? (!this.h24 ? Number + 1 : Number) : Number )
+             .map(Number.call, Number => timeLength < 60 ? (!this.h24 ? Number + 1 : Number) : Number )
              .filter(num => num % interval === 0)
              .map(time => this.pad(time));
     },
