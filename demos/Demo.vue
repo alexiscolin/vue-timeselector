@@ -3,13 +3,12 @@
     <p>Time: {{ time }}</p>
       <br><br>
     <timeselector v-model="time"
-                  :utc="false"
-                  :h24="true"
-                  displayFormat="HH:mm"
+                  :utc="true"
+                  :h24="false"
+                  displayFormat="HH [h]our[s] and mm [s]econd"
                   returnFormat="HH-mm"
-                  placeholder="bonjour"
-                  :initialView="true"
-                  :disable="{h:[16, 5], m: null, s: null}">
+                  :initialView="false"
+                  :interval="{h:1, m: 1, s: 1}">
       <template slot="hours">
         <span>hours</span>
       </template>
