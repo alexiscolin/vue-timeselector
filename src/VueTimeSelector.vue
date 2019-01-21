@@ -9,41 +9,41 @@
            :disabled="disabled"
            :required="required"
            :name="name"
-           :class="{'vtimeselector__input--is-open': !picker.isClosed}"
+           :class="{'vtimeselector__input--is-open': !pickerState.isClosed}"
            @click="togglePicker">
     <div class="vtimeselector__clear" @click="clearTime">
       <slot name="clear-ico"><span class="vtimeselector__clear__ico">x</span></slot>
     </div>
 
-    <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': picker.isClosed}">
+    <div class="vtimeselector__box" :class="{'vtimeselector__box--is-closed': pickerState.isClosed}">
         <ul class="vtimeselector__box__list vtimeselector__box__list--hours" v-if="displayHours">
           <li class="vtimeselector__box__head"><slot name="hours">HH</slot></li>
           <li class="vtimeselector__box__item vtimeselector__box__item--hours"
               v-for="(hour, index) in timeCount(interval.h, hoursLength)" :key="index"
-              :class="{'timeselector__box__item--is-selected': picker.selected.hour === hour, 'timeselector__box__item--is-highlighted': getState('hour', 'highlight', hour), 'timeselector__box__item--is-disabled': getState('hour', 'disable', hour)}"
+              :class="{'timeselector__box__item--is-selected': pickerState.selected.hour === hour, 'timeselector__box__item--is-highlighted': getState('hour', 'highlight', hour), 'timeselector__box__item--is-disabled': getState('hour', 'disable', hour)}"
               @click="selectTime('hour', hour, $event)">{{hour}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--minutes" v-if="displayMinutes">
           <li class="vtimeselector__box__head"><slot name="minutes">mm</slot></li>
           <li class="vtimeselector__box__item vtimeselector__box__item--minutes"
               v-for="(minute, index) in timeCount(interval.m)" :key="index"
-              :class="{'timeselector__box__item--is-selected': picker.selected.minute === minute, 'timeselector__box__item--is-highlighted': getState('minute', 'highlight', minute), 'timeselector__box__item--is-disabled': getState('minute', 'disable', minute)}"
+              :class="{'timeselector__box__item--is-selected': pickerState.selected.minute === minute, 'timeselector__box__item--is-highlighted': getState('minute', 'highlight', minute), 'timeselector__box__item--is-disabled': getState('minute', 'disable', minute)}"
               @click="selectTime('minute', minute, $event)">{{minute}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--seconds"  v-if="displaySeconds">
           <li class="vtimeselector__box__head"><slot name="seconds">ss</slot></li>
           <li class="vtimeselector__box__item vtimeselector__box__item--seconds"
               v-for="(second, index) in timeCount(interval.s)" :key="index"
-              :class="{'timeselector__box__item--is-selected': picker.selected.second === second, 'timeselector__box__item--is-highlighted': getState('second', 'highlight', second), 'timeselector__box__item--is-disabled': getState('second', 'disable', second)}"
+              :class="{'timeselector__box__item--is-selected': pickerState.selected.second === second, 'timeselector__box__item--is-highlighted': getState('second', 'highlight', second), 'timeselector__box__item--is-disabled': getState('second', 'disable', second)}"
               @click="selectTime('second', second, $event)">{{second}}</li>
         </ul>
         <ul class="vtimeselector__box__list vtimeselector__box__list--ampm"  v-if="!h24">
           <li class="vtimeselector__box__head"><slot name="ampm">AM / PM</slot></li>
           <li class="vtimeselector__box__item vtimeselector__box__item--ampm"
-              :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'AM'}"
+              :class="{'timeselector__box__item--is-selected': pickerState.selected.ampm === 'AM'}"
               @click="selectTime('ampm', 'AM', $event)">AM</li>
           <li class="vtimeselector__box__item vtimeselector__box__item--ampm"
-              :class="{'timeselector__box__item--is-selected': picker.selected.ampm === 'PM'}"
+              :class="{'timeselector__box__item--is-selected': pickerState.selected.ampm === 'PM'}"
               @click="selectTime('ampm', 'PM', $event)">PM</li>
         </ul>
     </div>
@@ -210,11 +210,7 @@ export default {
   },
   data () {
     return {
-      picker: {
-        hour: this.value ? (this.utc ? this.value.getUTCHours() : this.value.getHours()) : 0,
-        minute: this.value ? (this.utc ? this.value.getUTCMinutes() : this.value.getMinutes()) : 0,
-        second: this.value ? (this.utc ? this.value.getUTCSeconds() : this.value.getSeconds()) : 0,
-        ampm: !this.h24 ? 'AM' : null,
+      pickerState: {
         selected: {
           hour: null,
           minute: null,
@@ -233,6 +229,14 @@ export default {
     }
   },
   computed: {
+    picker () {
+      return {
+        hour: this.value ? (this.utc ? this.value.getUTCHours() : this.value.getHours()) : 0,
+        minute: this.value ? (this.utc ? this.value.getUTCMinutes() : this.value.getMinutes()) : 0,
+        second: this.value ? (this.utc ? this.value.getUTCSeconds() : this.value.getSeconds()) : 0,
+        ampm: !this.h24 ? (this.value ? (this.value.getHours() > 12 ? 'PM' : 'AM') : null ) : null,
+      }
+    },
     /**
     * Get 24|12 hours mode
     * @return {Number} - function to generate time replacement
@@ -292,12 +296,12 @@ export default {
 
       // Return formatted return if returnFormat set (absolute time ONLY)
       if (this.returnFormat)
-        return this.timeFormated('returnFormat')
+        this.$emit('formatedTime', this.timeFormated('returnFormat'));
 
       // Set hours in final Date format - default
-      this.picker.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
+      this.pickerState.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
       const date = this.value ? this.value : new Date();
-      return this.utc ? new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), this.picker.hour, this.picker.minute, this.picker.second)) : new Date(this.picker.time);
+      return this.utc ? new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), this.picker.hour, this.picker.minute, this.picker.second)) : new Date(this.pickerState.time);
     }
   },
   methods: {
@@ -318,7 +322,7 @@ export default {
     * @return {String} - formated time
     */
     timeFormated (type) {
-      if(this.placeholder && this.picker.isPristine)
+      if(this.placeholder && this.pickerState.isPristine)
         return this.placeholder;
 
       // Inline formating - for display method only - (separator/displayHours... props)
@@ -367,9 +371,9 @@ export default {
     selectTime (type, el, e) {
       // If not disable (input as select box item)
       if (!this.disabled && !this.getState(type, 'disable', el)) {
-        this.picker.isPristine = false;
+        this.pickerState.isPristine = false;
         this.picker[type] = e.target.textContent;
-        this.picker.selected[type] = el;
+        this.pickerState.selected[type] = el;
 
         /**
         * Emit selectedHour selectedMinute and selectedSecond depending on what changed
@@ -399,11 +403,11 @@ export default {
     * @public
     */
     clearTime () {
-      this.picker.isPristine = true;
-      this.picker.selected.hour = -1;
-      this.picker.selected.minute = -1;
-      this.picker.selected.second = -1;
-      this.picker.selected.ampm = null;
+      this.pickerState.isPristine = true;
+      this.pickerState.selected.hour = -1;
+      this.pickerState.selected.minute = -1;
+      this.pickerState.selected.second = -1;
+      this.pickerState.selected.ampm = null;
 
       this.picker.hour = 0;
       this.picker.minute = 0;
@@ -422,14 +426,14 @@ export default {
     */
     togglePicker () {
       if (!this.disabled) {
-        this.picker.isClosed = !this.picker.isClosed;
+        this.pickerState.isClosed = !this.pickerState.isClosed;
 
         /**
         * Emit opened|closed modal event
         * @event opened|closed
         * @type {null}
         */
-        this.picker.isClosed ? this.$emit('closed', this.$el) : this.$emit('opened', this.$el);
+        this.pickerState.isClosed ? this.$emit('closed', this.$el) : this.$emit('opened', this.$el);
       }
     },
 
@@ -440,8 +444,8 @@ export default {
     */
     close(e = null) {
       if (e === null) {
-        !this.picker.isClosed && this.togglePicker();
-      } else if (!this.$el.contains(e.target) && this.$el !== e.target && !this.picker.isClosed) {
+        !this.pickerState.isClosed && this.togglePicker();
+      } else if (!this.$el.contains(e.target) && this.$el !== e.target && !this.pickerState.isClosed) {
         this.togglePicker()
       }
     },
@@ -475,11 +479,11 @@ export default {
     let firstHour;
     if (!this.h24 && this.value) {
       const hour = firstHour = this.utc ? this.value.getUTCHours() : this.value.getHours()
-      this.picker.selected.ampm = hour <= 12 ? 'AM' : 'PM';
+      this.pickerState.selected.ampm = hour <= 12 ? 'AM' : 'PM';
       this.picker.ampm = hour <= 12 ? 'AM' : 'PM';
       this.picker.hour = hour >= 12 ? hour - 12 : hour;
     }
-    this.value !== null && ['hour', 'minute', 'second'].forEach(type => (this.picker.selected[type] = this.picker[type] && this.pad(this.picker[type])));
+    this.value !== null && ['hour', 'minute', 'second'].forEach(type => (this.pickerState.selected[type] = this.picker[type] && this.pad(this.picker[type])));
 
     // Get 24h again for input datetime format
     if (!this.h24 && this.value)
