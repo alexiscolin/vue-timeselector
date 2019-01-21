@@ -474,6 +474,22 @@ export default {
     }
   },
 
+  watch: {
+    value: function () {
+      this.picker.hour = this.value ? (this.utc ? this.value.getUTCHours() : this.value.getHours()) : 0;
+      this.picker.minute = this.value ? (this.utc ? this.value.getUTCMinutes() : this.value.getMinutes()) : 0;
+      this.picker.second = this.value ? (this.utc ? this.value.getUTCSeconds() : this.value.getSeconds()) : 0;
+
+      if (!this.pickerState.isPristine) {
+        this.pickerState.selected.hour = this.h24 ? this.picker.hour : (this.picker.hour > 12 ? this.picker.hour - 12 : this.picker.hour),
+        this.pickerState.selected.minute = this.picker.minute
+        this.pickerState.selected.second = this.picker.second
+        this.pickerState.selected.ampm = this.h24 ? null : (this.picker.hour > 12 ? 'PM' : 'AM')
+        this.pickerState.time = this.value;
+      }
+    }
+  },
+
   created() {
     /** Get preselected time @see timeCount */
     let firstHour;

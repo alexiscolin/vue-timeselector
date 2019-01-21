@@ -26,7 +26,7 @@ export default {
   components: { Timeselector },
   data() {
     return {
-      time: null
+      time: new Date()
     }
   },
   methods: {
