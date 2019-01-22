@@ -373,7 +373,7 @@ npm run styleguide:build
 **Component's documentation is available [here](https://alexiscolin.github.io/vue-timeselector/)**
 
 ### Changelog
-[See the changelog](https://github.com/alexiscolin/vue-timeselector/blob/master/CHANGELOG)
+[See the changelog](https://github.com/alexiscolin/vue-timeselector/blob/master/CHANGELOG.md)
 
 ### TODO
 
