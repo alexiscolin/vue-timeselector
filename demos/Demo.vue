@@ -4,8 +4,8 @@
       <br><br>
     <timeselector v-model="time"
                   :utc="false"
-                  :h24="false"
-                  returnFormat="HH-mm"
+                  :h24="true"
+                  displayFormat="HH-mm"
                   :initialView="false"
                   :displaySeconds="true"
                   :interval="{h:1, m: 1, s: 1}"
@@ -15,7 +15,7 @@
       </template>
     </timeselector>
 
-    <button @click="change">click</button>
+    <button @click="change">change the date</button>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
   components: { Timeselector },
   data() {
     return {
-      time: new Date()
+      time: null
     }
   },
   methods: {
@@ -34,7 +34,7 @@ export default {
       this.time = new Date();
     },
     formatedTime (e) {
-      console.log('formated' + e);
+      console.log('formated: ' + e);
     }
   }
 }

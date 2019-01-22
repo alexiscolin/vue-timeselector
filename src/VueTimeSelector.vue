@@ -294,10 +294,6 @@ export default {
       if (this.picker.hour === -1 && this.picker.minute === -1)
         return '';
 
-      // Return formatted return if returnFormat set (absolute time ONLY)
-      if (this.returnFormat)
-        this.$emit('formatedTime', this.timeFormated('returnFormat'));
-
       // Set hours in final Date format - default
       this.pickerState.time.setHours(this.picker.hour, this.picker.minute, this.picker.second);
       const date = this.value ? this.value : new Date();
@@ -383,6 +379,15 @@ export default {
         this.$emit(`selected${type.charAt(0).toUpperCase() + type.slice(1)}`, this.picker[type]);
 
         /**
+        * Return formatted time if returnFormat set (absolute time ONLY)
+        * @event formatedTime
+        * @type {String}
+        */
+        if (this.returnFormat)
+          this.$emit('formatedTime', this.timeFormated('returnFormat'));
+
+
+        /**
         * Emit event because input has changed
         * @event input
         * @type {Date|Object}
@@ -442,7 +447,7 @@ export default {
     * @param {Object} [e=null] - click event listened
     * @public
     */
-    close(e = null) {
+    close (e = null) {
       if (e === null) {
         !this.pickerState.isClosed && this.togglePicker();
       } else if (!this.$el.contains(e.target) && this.$el !== e.target && !this.pickerState.isClosed) {
