@@ -147,7 +147,7 @@ Finally, the component returns a `Date` object and is complient with other forma
 Please, keep in mind that prop makes the component return a String (and not a date anymore). So `UTC` formatting doesn't affect the returned string that is now the absolute number on which user has clicked.
 Also, note that the `:value` returned by the component is still a `Date` object. You need `formatedTime` event to listen the formated date.
 
-⚠️ (Since 0.1.4, `returnDate` need `formatedTime` to be get and doesn't act in the `:value` any longer)
+⚠️ (Since 0.1.4, `returnDate` needs `formatedTime` event to be get and not directly on the `:value` anymore)
 
 ``` html
 <timeselector v-model="time" returnFormat="HH" @formatedTime="formatedTime"></timeselector>
