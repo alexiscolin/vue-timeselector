@@ -3,18 +3,19 @@
     <p>Time: {{ time }}</p>
       <br><br>
     <timeselector v-model="time"
-                  :utc="true"
-                  :h24="false"
-                  displayFormat="HH [h]our[s] and mm [s]econd"
-                  returnFormat="HH-mm"
+                  :utc="false"
+                  :h24="true"
+                  displayFormat="HH-mm"
                   :initialView="false"
-                  :interval="{h:1, m: 1, s: 1}">
+                  :displaySeconds="true"
+                  :interval="{h:1, m: 1, s: 1}"
+                  @formatedTime="formatedTime">
       <template slot="hours">
         <span>hours</span>
       </template>
     </timeselector>
 
-
+    <button @click="change">change the date</button>
   </div>
 </template>
 
@@ -26,6 +27,14 @@ export default {
   data() {
     return {
       time: null
+    }
+  },
+  methods: {
+    change () {
+      this.time = new Date();
+    },
+    formatedTime (e) {
+      console.log('formated: ' + e);
     }
   }
 }

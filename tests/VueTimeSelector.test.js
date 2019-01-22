@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils';
+import Vue from 'vue';
 import VueTimeSelector from '../src/VueTimeSelector.vue';
 
 const factory = (values = {}) => {
@@ -198,10 +199,12 @@ describe('VueTimeSelector', () => {
     const minutes = Math.floor(Math.random() * 59);
 
     wrapper.findAll('.vtimeselector__box__item--hours').at(hours).trigger('click');
-    expect(wrapper.emitted().input[0][0]).toBe(`${hours}h0`);
+    expect(wrapper.emitted().formatedTime[0][0]).toBe(`${hours}h0`);
 
     wrapper.findAll('.vtimeselector__box__item--minutes').at(minutes).trigger('click');
-    expect(wrapper.emitted().input[1][0]).toBe(`${hours}h${minutes}`);
+    expect(wrapper.emitted().formatedTime[1][0]).toBe(`${hours}h${minutes}`);
+
+    console.log(wrapper.emitted().formatedTime)
   });
 
   /**

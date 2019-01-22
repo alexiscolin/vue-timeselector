@@ -73,7 +73,7 @@ export default {
   components: { Timeselector },
   data() {
     return {
-      time: new Date() // or null
+      time: null // or new Date() to set preselect the picker
       // ...
     }
   }
@@ -142,12 +142,15 @@ The best option to fully custom time displayed in the input is to use the *displ
 It's possible to escape a letter used for formatting ("h", "H", "m" ...) by surrounding it with brackets, eg. `HH[h]mm` could render *01h35*.
 Time may be set to UTC or not in order to display and return UTC time.
 
-Finally, the component returns a `Date` object and is complient with other format thanks to `returnFormat` props. This props should be configured in the same way as the `displayFormat` props.
+Finally, the component returns a `Date` object and is complient with other format thanks to `returnFormat` props. In combination with `formatedTime` event, this props let you listen for a returned date format that should be configured in the same way as the `displayFormat` props.
 
 Please, keep in mind that prop makes the component return a String (and not a date anymore). So `UTC` formatting doesn't affect the returned string that is now the absolute number on which user has clicked.
+Also, note that the `:value` returned by the component is still a `Date` object. You need `formatedTime` event to listen the formated date.
+
+⚠️ (Since 0.1.4, `returnDate` need `formatedTime` to be get and doesn't act in the `:value` any longer)
 
 ``` html
-<timeselector v-model="time" returnFormat="HH"></timeselector>
+<timeselector v-model="time" returnFormat="HH" @formatedTime="formatedTime"></timeselector>
 <!--  Will return "01" after you clicked on "01" (hour) in the timepicker whatever the UTC is set or not -->
 ```
 
@@ -328,6 +331,7 @@ These events are emitted on actions in the timepicker
 | selectedSecond    | Date       | A second has been selected           |
 | selectedAmpm      | String     | A ampm field has been selected       |
 | selectedDisabled  |            | A disabled time has been selected    |
+| formatedTime      | String     | Time formatting string emited        |
 | input             | Date       | Input value has been modified        |
 | cleared           |            | Selected time has been cleared       |
 
@@ -368,9 +372,13 @@ npm run styleguide:build
 
 **Component's documentation is available [here](https://alexiscolin.github.io/vue-timeselector/)**
 
+### Changelog
+[See the changelog](https://github.com/alexiscolin/vue-timeselector/blob/master/CHANGELOG)
+
 ### TODO
 
 * Picker defined style
+* Merge returnFormat and displayFormat props
 * More tests
 
 ## License
