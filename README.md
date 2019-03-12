@@ -244,7 +244,7 @@ Slots list:
 ### Use classes to curstomize elements
 #### Classes structure
 
-vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's easy for everyone to overrides the component's styles for each elements and their modifiers. As exemple, you may want to hide the clear button by set a `display: none` on the `.vtimeselector__clear` element. 
+vue-timeselector is built following [BEM](http://getbem.com/) guidelines so it's easy for everyone to overrides the component's styles for each elements and their modifiers. As exemple, you may want to hide the clear button by setting a `display: none` on the `.vtimeselector__clear` element. 
 
 Here is the classes structure:
 
