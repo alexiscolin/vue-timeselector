@@ -4,8 +4,8 @@
       <br><br>
     <timeselector v-model="time"
                   :utc="false"
-                  :h24="true"
-                  displayFormat="HH-mm"
+                  :h24="false"
+                  displayFormat="HH:mm a"
                   :initialView="false"
                   :displaySeconds="true"
                   :interval="{h:1, m: 1, s: 1}"

@@ -221,7 +221,7 @@ export default {
         isClosed: true,
         isPristine: true
       },
-      formater: ['HH', 'H', 'hh', 'h', 'kk', 'k', 'mm', 'm', 'ss', 's'],
+      formater: ['HH', 'H', 'hh', 'h', 'kk', 'k', 'mm', 'm', 'ss', 's', 'a'],
       longHourCount: 24,
       shortHourCount: 12,
       minCount: 60,
@@ -268,7 +268,8 @@ export default {
         mm: () => this.pad(this.picker.minute, true),
         m: () => this.picker.minute.toString(),
         ss: () => this.pad(this.picker.second, true),
-        s: () => this.picker.second.toString()
+        s: () => this.picker.second.toString(),
+        a: () => this.picker.hour >= 12 ? 'PM' : 'AM'
       }
     },
 
@@ -325,7 +326,8 @@ export default {
       if (type === 'displayFormat' && !this.displayFormat)
         return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
                 (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.pad(this.picker.minute) : '')) +
-                (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '');
+                (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '') +
+                (!this.h24 && this.picker.hour >= 12 ? ' AM' : ' PM' )
 
       // RegExp formating (formats props)
       let display = this[type];

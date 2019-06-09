@@ -168,6 +168,7 @@ Also, note that the `:value` returned by the component is still a `Date` object.
 | mm    | two digits minutes                      | 00 01 ... 58 59 |
 | s     | one digit seconds                       | 0 1 ... 58 59   |
 | ss    | two digits seconds                      | 00 01 ... 58 59 |
+| a     | AM-PM periods code                      | AM/PM           |
 
 
 ### 12 hours in modal
