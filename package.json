@@ -1,6 +1,6 @@
 {
   "name": "vue-timeselector",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Simple customizable Vue.js timepicker component",
   "author": "Alexis Colin <nesquimo@gmail.com>",
   "repository": "git+https://github.com/alexiscolin/vue-timeselector.git",
@@ -30,6 +30,9 @@
     "styleguide": "vue-styleguidist server",
     "styleguide:build": "vue-styleguidist build"
   },
+  "dependencies": {
+    "acorn": "^6.1.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/polyfill": "^7.2.5",
@@ -46,8 +49,8 @@
     "vue-jest": "^3.0.2",
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
-    "vue-styleguidist": "^2.1.1",
-    "webpack": "^4.27.1",
+    "vue-styleguidist": "^2.1.2",
+    "webpack": "^4.28.4",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.1.5"
