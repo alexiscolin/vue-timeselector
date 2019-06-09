@@ -327,7 +327,7 @@ export default {
         return  (this.displayHours ? (this.pad(this.picker.hour)) : '') +
                 (this.displayMinutes && this.displayHours ? (this.separator + this.pad(this.picker.minute)) : (this.displayMinutes ? this.pad(this.picker.minute) : '')) +
                 (this.displaySeconds ? (this.separator + this.pad(this.picker.second)) : '') +
-                (!this.h24 && this.picker.hour >= 12 ? ' AM' : ' PM' )
+                (!this.h24 ? (this.picker.hour >= 12 ? ' AM' : ' PM' ) : '')
 
       // RegExp formating (formats props)
       let display = this[type];
