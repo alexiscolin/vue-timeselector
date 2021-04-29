@@ -9,7 +9,7 @@
 
 vue-timeselector is a  **Vue (2.x)** component that gives you ability to select a time depending on multiple options. This component has been created in order to be as fully and simply customizable as powerful thanks to props (format, UTC, 12-24h, optional pickers, highlight, interval, native HTML attributes and many more...), events (opened picker, closed picker, cleared input...) and slots (icon, headers...).
 <br><br>
-<p align="center"><img src="http://files.de-jaune-et-de-bleu.com/img/github/vue-timeselector/vue-timeselector-1.png" width="30%"></p>
+<p align="center"><img src="https://files.jaunebleu.co/img/github/vue-timeselector/vue-timeselector-1.png" width="30%"></p>
 <br>
 
 ## Install
